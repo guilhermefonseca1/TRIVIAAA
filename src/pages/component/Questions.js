@@ -35,7 +35,6 @@ class Questions extends Component {
       }
       if (questions.length !== 0) {
         const array = questions[0].incorrect_answers.concat(questions[0].correct_answer);
-        const randomNumber = Math.round(Math.random() * (3 - 0) + 0)
         console.log(randomNumber);
         return (
           <div>
@@ -62,12 +61,6 @@ class Questions extends Component {
                           { element }
                         </button>)))
                 }
-                {/* <button
-                  type="button"
-                  data-testid="correct-answer"
-                >
-                  { questions[0].correct_answer }
-                </button> */}
               </div>
             </div>
           </div>);
