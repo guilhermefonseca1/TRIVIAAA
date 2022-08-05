@@ -29,10 +29,14 @@ class Questions extends Component {
     render() {
       const { teste, questions } = this.state;
       const number = 3;
+
       if (teste.response_code === number) {
         return <Redirect to="/" />;
       }
       if (questions.length !== 0) {
+        const array = questions[0].incorrect_answers.concat(questions[0].correct_answer);
+        const randomNumber = Math.round(Math.random() * (3 - 0) + 0)
+        console.log(randomNumber);
         return (
           <div>
             <div key={ questions[0].index } className="card_question">
@@ -40,21 +44,30 @@ class Questions extends Component {
               <p data-testid="question-text">{ questions[0].question }</p>
               <div data-testid="answer-options">
                 {
-                  questions[0].incorrect_answers.map((element) => (
-                    <button
-                      type="button"
-                      key={ element.index }
-                      data-testid="wrong-answer"
-                    >
-                      { element }
-                    </button>))
+                  array.map((element) => (
+                    element === questions[0].correct_answer
+                      ? (
+                        <button
+                          type="button"
+                          data-testid="correct-answer"
+                        >
+                          { element }
+                        </button>)
+                      : (
+                        <button
+                          type="button"
+                          key={ element.index }
+                          data-testid="wrong-answer"
+                        >
+                          { element }
+                        </button>)))
                 }
-                <button
+                {/* <button
                   type="button"
                   data-testid="correct-answer"
                 >
                   { questions[0].correct_answer }
-                </button>
+                </button> */}
               </div>
             </div>
           </div>);
