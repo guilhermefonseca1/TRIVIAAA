@@ -1,7 +1,11 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getToken } from '../Redux/Action';
+import { saveTokenToStorage } from '../tests/helpers/addTokenToStorage';
 import logo from '../trivia.png';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,6 +19,16 @@ export default class Login extends Component {
     this.setState({
       [name]: value,
     });
+  }
+
+  handleClick = async () => {
+    const { saveTokenToRedux, history } = this.props;
+    await saveTokenToRedux();
+
+    const { getTokenFromStore } = this.props;
+    saveTokenToStorage(getTokenFromStore);
+
+    history.push('/game');
   }
 
   render() {
@@ -61,3 +75,21 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  getTokenFromStore: PropTypes.any,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+  saveToken: PropTypes.func,
+}.isRequired;
+
+const mapStateToProps = (store) => ({
+  getTokenFromStore: store.token.token,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  saveTokenToRedux: () => dispatch(getToken()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
