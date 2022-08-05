@@ -18,9 +18,20 @@ class Config extends React.Component {
             </select>
           </label>
           <label htmlFor="sound">
+            Sound:
             <select name="sound" id="sound">
               <option>On</option>
               <option>Off</option>
+            </select>
+          </label>
+          <label htmlFor="language">
+            Language:
+            <select name="language" id="language">
+              <option>English</option>
+              <option>Portuguese</option>
+              <option>Spanish</option>
+              <option>Danish</option>
+              <option>Polish</option>
             </select>
           </label>
         </form>
