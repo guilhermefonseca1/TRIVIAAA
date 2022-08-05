@@ -64,22 +64,24 @@ class Login extends React.Component {
         <div className="login-page">
           <p>Informe seu nome e email:</p>
           <form>
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              data-testid="input-player-name"
-              value={ username }
-              onChange={ (event) => this.handleInputChange(event) }
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              data-testid="input-gravatar-email"
-              value={ email }
-              onChange={ (event) => this.handleInputChange(event) }
-            />
+            <div className="login-inputs">
+              <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                data-testid="input-player-name"
+                value={ username }
+                onChange={ (event) => this.handleInputChange(event) }
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                data-testid="input-gravatar-email"
+                value={ email }
+                onChange={ (event) => this.handleInputChange(event) }
+              />
+            </div>
             {
               (invalid) ? <p>Por favor preencha corretamente as informações</p> : <> </>
             }
