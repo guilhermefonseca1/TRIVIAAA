@@ -45,6 +45,7 @@ const mapStateToProps = (store) => ({
   username: store.player.name,
   scores: store.player.score,
   email: store.player.gravatarEmail,
+
 });
 
 Feedback.propTypes = {
