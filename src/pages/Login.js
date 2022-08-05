@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import logo from '../trivia.png';
+import { playGame } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -41,7 +43,9 @@ class Login extends React.Component {
     const data = await response.json();
     const token = await data.token;
     await localStorage.setItem('token', token);
-    const { history } = this.props;
+    const { history, play } = this.props;
+    const { username, email } = this.state;
+    play(username, email);
     history.push('/game');
   }
 
@@ -105,6 +109,11 @@ Login.propTypes = {
   history: propTypes.shape({
     push: propTypes.func,
   }).isRequired,
+  play: propTypes.func.isRequired,
 };
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  play: (name, email) => dispatch(playGame(name, email)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
