@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 import { connect } from 'react-redux';
+import Questions from './component/Questions';
 
 class Game extends React.Component {
   constructor() {
@@ -36,6 +37,7 @@ class Game extends React.Component {
           </div>
           <h4 data-testid="header-score">{ `Score = ${score}` }</h4>
         </header>
+        <Questions />
       </div>
     );
   }
