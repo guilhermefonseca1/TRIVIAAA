@@ -1,5 +1,6 @@
 body {
   box-sizing: border-box;
+  background-color: #282c34;
   margin: 0;
   padding: 0;
 }
@@ -36,7 +37,7 @@ body {
   flex-direction: column;
   font-size: calc(10px + 2vmin);
   justify-content: center;
-  min-height: 100vh;
+  height: 300px;
 }
 
 .App-link {
