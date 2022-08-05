@@ -31,7 +31,7 @@ class Config extends React.Component {
               <option>Portuguese</option>
               <option>Spanish</option>
               <option>Danish</option>
-              <option>Polish</option>
+              <option>Swedish</option>
             </select>
           </label>
         </form>
