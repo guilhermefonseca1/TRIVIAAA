@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 
 class Feedback extends React.Component {
@@ -43,7 +44,8 @@ class Feedback extends React.Component {
 const mapStateToProps = (store) => ({
   username: store.player.name,
   scores: store.player.score,
-  email: state.player.gravatarEmail,
+  email: store.player.gravatarEmail,
+
 });
 
 Feedback.propTypes = {
