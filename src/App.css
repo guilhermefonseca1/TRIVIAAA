@@ -109,3 +109,21 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.options {
+  background-color: white;
+  border: 3px solid black;
+  color: black;
+}
+
+.right-option {
+  background-color: green;
+  border: 3px solid black;
+  color: black;
+}
+
+.wrong-options {
+  background-color: red;
+  border: 3px solid black;
+  color: black;
+}
