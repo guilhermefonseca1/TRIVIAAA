@@ -7,7 +7,6 @@ export default class Login extends Component {
     this.state = {
       inputName: '',
       inputEmail: '',
-
     };
   }
 
@@ -15,7 +14,6 @@ export default class Login extends Component {
     const { name, value } = target;
     this.setState({
       [name]: value,
-
     });
   }
 
@@ -28,7 +26,6 @@ export default class Login extends Component {
             <img src={ logo } className="App-logo" alt="logo" />
             <p>SUA VEZ</p>
           </header>
-
         </div>
         <form>
           <label htmlFor="playerName">
@@ -59,7 +56,6 @@ export default class Login extends Component {
           >
             Play
           </button>
-
         </form>
       </div>
     );
