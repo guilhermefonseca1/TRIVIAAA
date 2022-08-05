@@ -36,7 +36,11 @@ class Login extends React.Component {
     }, () => this.inputRolesValidation());
   }
 
-  handleEnter = () => {
+  handleEnter = async () => {
+    const response = await fetch('https://opentdb.com/api_token.php?command=request');
+    const data = await response.json();
+    const token = await data.token;
+    await localStorage.setItem('token', token);
     const { history } = this.props;
     history.push('/game');
   }
