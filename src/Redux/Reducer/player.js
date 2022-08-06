@@ -1,3 +1,5 @@
+import { SAVE_PLAYER_INFO } from '../Action';
+
 const INITIAL_STATE = {
   name: '',
   assertions: '',
@@ -7,6 +9,12 @@ const INITIAL_STATE = {
 
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+  case SAVE_PLAYER_INFO:
+    return {
+      ...state,
+      name: action.name,
+      gravatarEmail: action.email,
+    };
   default:
     return state;
   }

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getToken } from '../Redux/Action';
+import { getToken, savePlayerInfo } from '../Redux/Action';
 import { saveTokenToStorage } from '../tests/helpers/addTokenToStorage';
 import logo from '../trivia.png';
 
@@ -22,13 +22,20 @@ class Login extends Component {
   }
 
   handleClick = async () => {
-    const { saveTokenToRedux, history } = this.props;
+    const { inputName, inputEmail } = this.state;
+    const { saveTokenToRedux, playerInfo, history, getResponseCode } = this.props;
     await saveTokenToRedux();
 
     const { getTokenFromStore } = this.props;
     saveTokenToStorage(getTokenFromStore);
+    playerInfo(inputName, inputEmail);
 
     history.push('/game');
+    const invalidToken = 3;
+    if (getResponseCode === invalidToken) {
+      localStorage.removeItem('token');
+      history.push('/');
+    }
   }
 
   render() {
@@ -86,10 +93,12 @@ Login.propTypes = {
 
 const mapStateToProps = (store) => ({
   getTokenFromStore: store.token.token,
+  getResponseCode: store.token.responseCode,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   saveTokenToRedux: () => dispatch(getToken()),
+  playerInfo: (name, email) => dispatch(savePlayerInfo(name, email)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
