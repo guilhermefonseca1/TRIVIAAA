@@ -75,3 +75,18 @@ body {
   padding: 10px;
 }
 
+.inputLogin {
+  padding: 5px;
+}
+
+.button {
+  background-color: #df9a1b; /* Green */
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 13px;
+  margin-top: 15px;
+  padding: 8px 22px;
+  text-align: center;
+  text-decoration: none;
+}

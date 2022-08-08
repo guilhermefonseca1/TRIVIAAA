@@ -47,6 +47,8 @@ class Login extends Component {
         <form className="formLogin">
           <label htmlFor="playerName">
             <input
+              placeholder="Nome do Jogador"
+              className="inputLogin"
               id="playerName"
               data-testid="input-player-name"
               value={ inputName }
@@ -57,6 +59,8 @@ class Login extends Component {
           </label>
           <label htmlFor="email">
             <input
+              placeholder="Email"
+              className="inputLogin"
               id="email"
               data-testid="input-gravatar-email"
               value={ inputEmail }
@@ -66,6 +70,7 @@ class Login extends Component {
             />
           </label>
           <button
+            className="button"
             data-testid="btn-play"
             type="button"
             disabled={ !(inputName && inputEmail) }
@@ -75,6 +80,7 @@ class Login extends Component {
           </button>
         </form>
         <button
+          className="button"
           type="button"
           data-testid="btn-settings"
           onClick={ () => history.push('/settings') }
