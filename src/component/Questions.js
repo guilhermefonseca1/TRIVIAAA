@@ -8,6 +8,8 @@ class Questions extends Component {
       teste: '',
       questions: '',
       seconds: 30,
+      classWrongOptions: 'options',
+      classCorrectOption: 'options',
     };
   }
 
@@ -25,6 +27,13 @@ class Questions extends Component {
     }
   }
 
+  handleClickAnswer = () => {
+    this.setState({
+      classCorrectOption: 'correct-option',
+      classWrongOptions: 'wrong-options',
+    });
+  }
+
     getQuestions = async (token) => {
       const request = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
       const requestJson = await request.json();
@@ -37,7 +46,8 @@ class Questions extends Component {
     };
 
     render() {
-      const { teste, questions, seconds } = this.state;
+      const { teste, questions, seconds, classWrongOptions,
+        classCorrectOption } = this.state;
       const number3 = 3;
       const number05 = 0.5;
 
@@ -62,8 +72,11 @@ class Questions extends Component {
                       ? (
                         <button
                           type="button"
+                          name="correct-answer"
                           data-testid="correct-answer"
                           disabled={ seconds === 0 }
+                          className={ classCorrectOption }
+                          onClick={ () => this.handleClickAnswer() }
                         >
                           { element }
                         </button>)
@@ -71,8 +84,11 @@ class Questions extends Component {
                         <button
                           type="button"
                           key={ element.index }
+                          name="wrong-answer"
                           data-testid="wrong-answer"
                           disabled={ seconds === 0 }
+                          className={ classWrongOptions }
+                          onClick={ () => this.handleClickAnswer() }
                         >
                           { element }
                         </button>)))
