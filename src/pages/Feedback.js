@@ -1,6 +1,7 @@
-// import React from 'react';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+import md5 from 'crypto-js/md5';
+import PropTypes from 'prop-types';
 
 // class Feedback extends React.Component {
 //   constructor() {
@@ -40,11 +41,12 @@
 //   }
 // }
 
-// const mapStateToProps = (store) => ({
-//   username: store.player.name,
-//   scores: store.player.score,
-//   email: state.player.gravatarEmail,
-// });
+const mapStateToProps = (store) => ({
+  username: store.player.name,
+  scores: store.player.score,
+  email: store.player.gravatarEmail,
+
+});
 
 // Feedback.propTypes = {
 //   username: PropTypes.string.isRequired,
