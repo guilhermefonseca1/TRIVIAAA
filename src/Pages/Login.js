@@ -26,12 +26,10 @@ class Login extends Component {
     const { saveTokenToRedux, playerInfo, history } = this.props;
     await saveTokenToRedux();
 
-    const { getTokenFromStore, userSave } = this.props;
+    const { getTokenFromStore } = this.props;
 
     saveTokenToStorage(getTokenFromStore);
     playerInfo(inputName, inputEmail);
-
-    userSave(inputName, inputEmail);
 
     history.push('/game');
   }
