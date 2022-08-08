@@ -23,7 +23,7 @@ class Login extends Component {
 
   handleClick = async () => {
     const { inputName, inputEmail } = this.state;
-    const { saveTokenToRedux, playerInfo, history, getResponseCode } = this.props;
+    const { saveTokenToRedux, playerInfo, history } = this.props;
     await saveTokenToRedux();
 
     const { getTokenFromStore } = this.props;
@@ -31,11 +31,6 @@ class Login extends Component {
     playerInfo(inputName, inputEmail);
 
     history.push('/game');
-    const invalidToken = 3;
-    if (getResponseCode === invalidToken) {
-      localStorage.removeItem('token');
-      history.push('/');
-    }
   }
 
   render() {

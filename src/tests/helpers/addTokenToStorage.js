@@ -1,4 +1,4 @@
-export function getTokenFromStore(key) {
+export function getTokenFromStorage(key) {
   const request = localStorage.getItem(key);
 
   return request;
