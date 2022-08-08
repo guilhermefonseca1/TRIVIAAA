@@ -53,10 +53,11 @@ class Feedback extends React.Component {
           />
 
           <h1 data-testid="feedback-text">
-            {feedback }
+            { feedback }
           </h1>
           <p data-testid="header-player-name">{ username }</p>
           <p data-testid="header-score">{ scores }</p>
+          <p data-testid="feedback-total-question">{ assertions }</p>
         </header>
         <button
           type="button"
