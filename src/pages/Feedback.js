@@ -40,7 +40,7 @@ class Feedback extends React.Component {
 
   render() {
     const { gravatarImageUrl } = this.state;
-    const { username, scores } = this.props;
+    const { username, scores, assertions } = this.props;
     const altText = `Imagem de ${username}`;
     const feedback = this.getFeedback();
     return (
@@ -53,10 +53,11 @@ class Feedback extends React.Component {
           />
 
           <h1 data-testid="feedback-text">
-            {feedback }
+            { feedback }
           </h1>
           <p data-testid="header-player-name">{ username }</p>
           <p data-testid="header-score">{ scores }</p>
+          <p data-testid="feedback-total-question">{ assertions }</p>
         </header>
         <button
           type="button"
