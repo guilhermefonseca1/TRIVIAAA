@@ -45,7 +45,6 @@ class Feedback extends React.Component {
           </h1>
           <p data-testid="header-player-name">{ username }</p>
           <p data-testid="header-score">{ scores }</p>
-          console.log('oi')
         </header>
       </div>
     );
