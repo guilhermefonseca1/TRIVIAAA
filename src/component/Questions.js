@@ -47,13 +47,18 @@ class Questions extends Component {
       const request = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
       const requestJson = await request.json();
       const number05 = 0.5;
-      this.setState({
-        questions: requestJson.results,
-        answers: requestJson.results[0].incorrect_answers
-          .concat(requestJson.results[0].correct_answer)
-          .sort(() => number05 - Math.random()),
-        teste: requestJson,
-      });
+      const { history } = this.props;
+      try {
+        this.setState({
+          questions: requestJson.results,
+          answers: requestJson.results[0].incorrect_answers
+            .concat(requestJson.results[0].correct_answer)
+            .sort(() => number05 - Math.random()),
+          teste: requestJson,
+        });
+      } catch {
+        history.push('/');
+      }
       return requestJson;
     };
 
@@ -93,7 +98,7 @@ class Questions extends Component {
       const { history } = this.props;
       const number3 = 3;
       const testReponse = 'correct-option';
-      if (teste.response_code === number3 || teste === null) {
+      if (teste.response_code === number3) {
         history.push('/');
       }
       if (questions.length !== 0) {
