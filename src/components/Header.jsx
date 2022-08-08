@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { MD5 } from 'crypto-js';
-import fetchGravatar from '../services/fetchGravatar';
+import { MD5 } from 'crypto-js';
 
 class Header extends Component {
   // getGravatar = async () => {
@@ -10,12 +10,21 @@ class Header extends Component {
   //   console.log(user);
   //   // fetch(`www.gravatar.com/avatar/${user}`);
   // }
+  // async componentDidMount () {
+  //   await fetchGravatar();
+  // }
 
   render() {
     const { name, email } = this.props;
+    const gravatar = MD5(email).toString();
+
     return (
       <div>
-        {/* <img src={ fetchGravatar(email) } alt="" /> */}
+        <img
+          src={ `https://www.gravatar.com/avatar/${gravatar}` }
+          alt=""
+          data-testid="header-profile-picture"
+        />
         <p data-testid="header-player-name">{name}</p>
         <p data-testid="header-score">0</p>
       </div>
