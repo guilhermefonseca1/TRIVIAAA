@@ -15,6 +15,7 @@ class Questions extends Component {
       idQuestion: 0,
       classWrongOptions: 'options',
       classCorrectOption: 'options',
+      clicked: false,
     };
   }
 
@@ -33,10 +34,14 @@ class Questions extends Component {
   }
 
   handleClickAnswer = () => {
-    this.setState({
-      classCorrectOption: 'correct-option',
-      classWrongOptions: 'wrong-options',
-    });
+    const { clicked } = this.state;
+    if (!clicked) {
+      this.setState({
+        classCorrectOption: 'correct-option',
+        classWrongOptions: 'wrong-options',
+        clicked: true,
+      });
+    }
   }
 
     getQuestions = async (token) => {
@@ -54,16 +59,16 @@ class Questions extends Component {
       return requestJson;
     };
 
-    // getAnswers = () => {
-    //   const { questions, idQuestion } = this.state;
-    //   const number05 = 0.5;
-    //   this.setState({
-    //     answers: questions[idQuestion + 1].incorrect_answers
-    //       .concat(questions[idQuestion + 1].correct_answer)
-    //       .sort(() => number05 - Math.random()),
-    //     idQuestion: idQuestion + 1,
-    //   });
-    // };
+    getAnswers = () => {
+      const { questions, idQuestion } = this.state;
+      const number05 = 0.5;
+      this.setState({
+        answers: questions[idQuestion + 1].incorrect_answers
+          .concat(questions[idQuestion + 1].correct_answer)
+          .sort(() => number05 - Math.random()),
+        idQuestion: idQuestion + 1,
+      });
+    };
 
     somaScore = (timer, difficulty) => {
       const { addScoreDispatch } = this.props;
@@ -78,6 +83,7 @@ class Questions extends Component {
       const { teste, questions, seconds, classWrongOptions,
         classCorrectOption, answers, idQuestion } = this.state;
       const number3 = 3;
+      const testReponse = 'correct-option';
 
       if (teste.response_code === number3) {
         return <Redirect to="/" />;
@@ -102,7 +108,8 @@ class Questions extends Component {
                           key={ index }
                           name="correct-answer"
                           data-testid="correct-answer"
-                          disabled={ seconds === 0 }
+                          disabled={ seconds === 0
+                            || classCorrectOption === testReponse }
                           className={ classCorrectOption }
                           onClick={ () => {
                             this.handleClickAnswer();
@@ -117,13 +124,25 @@ class Questions extends Component {
                           key={ index }
                           name="wrong-answer"
                           data-testid="wrong-answer"
-                          disabled={ seconds === 0 }
+                          disabled={ seconds === 0
+                            || classCorrectOption === testReponse }
                           className={ classWrongOptions }
                           onClick={ () => this.handleClickAnswer() }
                         >
                           { element }
                         </button>)))
                 }
+                <br />
+                { seconds === 0
+                || classWrongOptions === 'wrong-options'
+                  ? (
+                    <button
+                      type="button"
+                      data-testid="btn-next"
+                      // onClick={ () => this.getAnswers() }
+                    >
+                      Next
+                    </button>) : ''}
               </div>
             </div>
           </div>);
