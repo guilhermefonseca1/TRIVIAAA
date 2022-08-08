@@ -1,4 +1,5 @@
 body {
+  background-color: #282c34;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -35,8 +36,8 @@ body {
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
+  height: 300px;
   justify-content: center;
-  min-height: 100vh;
 }
 
 .App-link {
@@ -60,4 +61,69 @@ body {
   40%, 60% {
     transform: translate3d(4px, 0, 0);
   }
+}
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-page p {
+  color: whitesmoke;
+  font-size: large;
+  text-shadow: black;
+}
+
+.login-page input {
+  border: 3px solid black;
+  height: 40px;
+  margin-left: 60px;
+  margin-right: 60px;
+  text-align: center;
+}
+
+.login-page button {
+  background-color: white;
+  border: 3px solid black;
+  color: black;
+  height: 35px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 25px;
+  width: 100px;
+}
+
+.login-page button:disabled {
+  background-color: lightgray;
+  border: 3px solid gray;
+  color: gray;
+}
+
+.login-page button:hover:enabled {
+  background-color: black;
+  border: 3px solid white;
+  color: white;
+}
+
+.login-inputs {
+  display: flex;
+  justify-content: center;
+}
+
+.options {
+  background-color: white;
+  border: 3px solid black;
+  color: black;
+}
+
+.correct-option {
+  background-color: white;
+  border: 3px solid rgb(6, 240, 15);
+  color: rgb(0, 90, 3);
+}
+
+.wrong-options {
+  background-color: white;
+  border: 3px solid red;
+  color: darkred;
 }

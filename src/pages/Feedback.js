@@ -26,6 +26,10 @@ class Feedback extends React.Component {
     if (assertions >= MIN_ASSERTIONS) {
       return 'Well Done!';
     } return 'Could be better...';
+
+  handlePlayAgainButton = () => {
+    const { history } = this.props;
+    history.push('/');
   }
 
   render() {
@@ -40,12 +44,20 @@ class Feedback extends React.Component {
             data-testid="header-profile-picture"
             alt={ altText }
           />
+
           <h1 data-testid="feedback-text">
             { this.getFeedback }
           </h1>
           <p data-testid="header-player-name">{ username }</p>
           <p data-testid="header-score">{ scores }</p>
         </header>
+        <button
+          type="button"
+          data-testid="btn-play-again"
+          onClick={ () => this.handlePlayAgainButton() }
+        >
+          Play Again
+        </button>
       </div>
     );
   }
@@ -64,6 +76,10 @@ Feedback.propTypes = {
   scores: PropTypes.number.isRequired,
   email: PropTypes.string.isRequired,
   assertions: PropTypes.number.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+
 };
 
 export default connect(mapStateToProps)(Feedback);
