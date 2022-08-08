@@ -10,6 +10,7 @@ class Questions extends Component {
       seconds: 30,
       classWrongOptions: 'options',
       classCorrectOption: 'options',
+      clicked: false,
     };
   }
 
@@ -28,10 +29,14 @@ class Questions extends Component {
   }
 
   handleClickAnswer = () => {
-    this.setState({
-      classCorrectOption: 'correct-option',
-      classWrongOptions: 'wrong-options',
-    });
+    const { clicked } = this.state;
+    if (!clicked) {
+      this.setState({
+        classCorrectOption: 'correct-option',
+        classWrongOptions: 'wrong-options',
+        clicked: true,
+      });
+    }
   }
 
     getQuestions = async (token) => {

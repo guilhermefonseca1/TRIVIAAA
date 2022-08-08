@@ -83,7 +83,6 @@ const mapStateToProps = (store) => ({
   email: store.player.gravatarEmail,
   feedbackText: store.player.feedback,
   assertions: store.player.assertions,
-
 });
 
 Feedback.propTypes = {
