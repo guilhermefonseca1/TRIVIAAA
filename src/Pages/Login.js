@@ -44,6 +44,7 @@ class Login extends Component {
         </div>
         <form>
           <label htmlFor="playerName">
+            Name:
             <input
               id="playerName"
               data-testid="input-player-name"
@@ -54,6 +55,7 @@ class Login extends Component {
             />
           </label>
           <label htmlFor="email">
+            Email:
             <input
               id="email"
               data-testid="input-gravatar-email"
