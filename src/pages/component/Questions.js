@@ -28,14 +28,14 @@ class Questions extends Component {
 
     render() {
       const { teste, questions } = this.state;
-      const number = 3;
+      const number3 = 3;
+      const number05 = 0.5;
 
-      if (teste.response_code === number) {
+      if (teste.response_code === number3) {
         return <Redirect to="/" />;
       }
       if (questions.length !== 0) {
         const array = questions[0].incorrect_answers.concat(questions[0].correct_answer);
-        console.log(randomNumber);
         return (
           <div>
             <div key={ questions[0].index } className="card_question">
@@ -43,7 +43,7 @@ class Questions extends Component {
               <p data-testid="question-text">{ questions[0].question }</p>
               <div data-testid="answer-options">
                 {
-                  array.map((element) => (
+                  array.sort(() => number05 - Math.random()).map((element) => (
                     element === questions[0].correct_answer
                       ? (
                         <button
