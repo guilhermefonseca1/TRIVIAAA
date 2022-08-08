@@ -4,17 +4,11 @@ import React from "react";
 import App from "../App";
 import renderWithRouterAndRedux from "./helpers/renderWithRouterAndRedux";
 
-const token = {
+const isToken = {
   "response_code":0,
   "response_message":"Token Generated Successfully!",
   "token":"f00cb469ce38726ee00a7c6836761b0a4fb808181a125dcde6d50a9f3c9127b6",
 };
-const { store } = renderWithRouterAndRedux(<Login />);
-
-jest.spyOn(global, 'fetch');
-  global.fetch.mockResolvedValue({
-    json: jest.fn().mockResolvedValue({ token }),
-  });
 
 
 describe('Testando as configurações do componente Login', () => {
@@ -103,14 +97,23 @@ describe('Testando as configurações do componente Login', () => {
 
   })
 
-  // it('login', () => {
-  //   renderWithRouterAndRedux(<App />);
+  it('login', () => {
+    renderWithRouterAndRedux(<App />);
 
-  //   const testeToken = JSON.parse(localStorage.getItem('token'));
+    const { store } = renderWithRouterAndRedux(<App />);
 
-  //   expect(testeToken).toBeDefined();
-  //   expect(storageToken).toBe(mockToken["token"]);
+    jest.spyOn(global, 'fetch');
+      global.fetch.mockResolvedValue({
+        json: jest.fn().mockResolvedValue({ token }),
+      });
+    
+
+    const testeToken = JSON.parse(localStorage.getItem('token'));
+
+    expect(testeToken).toBeDefined();
+    expect(testeToken).toBe(isToken["token"]);
 
 
 
   })
+})
