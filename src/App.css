@@ -116,14 +116,14 @@ body {
   color: black;
 }
 
-.right-option {
-  background-color: green;
-  border: 3px solid black;
-  color: black;
+.correct-option {
+  background-color: white;
+  border: 3px solid rgb(6, 240, 15);
+  color: rgb(0, 90, 3);
 }
 
 .wrong-options {
-  background-color: red;
-  border: 3px solid black;
-  color: black;
+  background-color: white;
+  border: 3px solid red;
+  color: darkred;
 }
