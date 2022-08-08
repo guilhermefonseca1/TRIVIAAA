@@ -10,7 +10,9 @@ class Questions extends Component {
     this.state = {
       teste: '',
       questions: '',
+      answers: [],
       seconds: 30,
+      idQuestion: 0,
       classWrongOptions: 'options',
       classCorrectOption: 'options',
     };
@@ -41,12 +43,27 @@ class Questions extends Component {
       const request = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
       const requestJson = await request.json();
       console.log(requestJson);
+      const number05 = 0.5;
       this.setState({
         questions: requestJson.results,
+        answers: requestJson.results[0].incorrect_answers
+          .concat(requestJson.results[0].correct_answer)
+          .sort(() => number05 - Math.random()),
         teste: requestJson,
       });
       return requestJson;
     };
+
+    // getAnswers = () => {
+    //   const { questions, idQuestion } = this.state;
+    //   const number05 = 0.5;
+    //   this.setState({
+    //     answers: questions[idQuestion + 1].incorrect_answers
+    //       .concat(questions[idQuestion + 1].correct_answer)
+    //       .sort(() => number05 - Math.random()),
+    //     idQuestion: idQuestion + 1,
+    //   });
+    // };
 
     somaScore = (timer, difficulty) => {
       const { addScoreDispatch } = this.props;
@@ -59,28 +76,26 @@ class Questions extends Component {
 
     render() {
       const { teste, questions, seconds, classWrongOptions,
-        classCorrectOption } = this.state;
+        classCorrectOption, answers, idQuestion } = this.state;
       const number3 = 3;
-      const number05 = 0.5;
 
       if (teste.response_code === number3) {
         return <Redirect to="/" />;
       }
       if (questions.length !== 0) {
-        const array = questions[0].incorrect_answers.concat(questions[0].correct_answer);
         return (
           <div>
             <p>
               Timer:
               { seconds }
             </p>
-            <div key={ questions[0].index } className="card_question">
-              <p data-testid="question-category">{ questions[0].category }</p>
-              <p data-testid="question-text">{ questions[0].question }</p>
+            <div key={ questions[idQuestion].index } className="card_question">
+              <p data-testid="question-category">{ questions[idQuestion].category }</p>
+              <p data-testid="question-text">{ questions[idQuestion].question }</p>
               <div data-testid="answer-options">
                 {
-                  array.sort(() => number05 - Math.random()).map((element, index) => (
-                    element === questions[0].correct_answer
+                  answers.map((element, index) => (
+                    element === questions[idQuestion].correct_answer
                       ? (
                         <button
                           type="button"
@@ -91,7 +106,7 @@ class Questions extends Component {
                           className={ classCorrectOption }
                           onClick={ () => {
                             this.handleClickAnswer();
-                            this.somaScore(1, questions[0].difficulty);
+                            this.somaScore(seconds, questions[idQuestion].difficulty);
                           } }
                         >
                           { element }
