@@ -111,7 +111,7 @@ describe('Testando as configurações do componente Login', () => {
     const testeToken = JSON.parse(localStorage.getItem('token'));
 
     expect(testeToken).toBeDefined();
-    expect(testeToken).toBe(isToken["token"]);
+    expect(testeToken).toBe(isToken["token"])
 
 
 
