@@ -25,6 +25,11 @@ class Feedback extends React.Component {
     history.push('/');
   }
 
+  handleRankingButton = () => {
+    const { history } = this.props;
+    history.push('/ranking');
+  }
+
   render() {
     const { gravatarImageUrl } = this.state;
     const { username, scores } = this.props;
@@ -47,6 +52,13 @@ class Feedback extends React.Component {
           onClick={ () => this.handlePlayAgainButton() }
         >
           Play Again
+        </button>
+        <button
+          type="button"
+          data-testid="btn-ranking"
+          onClick={ () => this.handleRankingButton() }
+        >
+          Ranking
         </button>
       </div>
     );
