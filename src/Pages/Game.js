@@ -38,7 +38,7 @@ class Game extends Component {
       questionsIndex: prevState.questionsIndex + 1,
     }));
 
-    console.log(id);
+    // se o id for igual a correct-aswer pinta de verde, se não, vermelho.
   }
 
   render() {
