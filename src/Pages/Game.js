@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Header from '../components/Header';
+import logo from '../trivia.png';
 
 class Game extends Component {
   constructor() {
@@ -37,7 +39,7 @@ class Game extends Component {
     this.setState((prevState) => ({
       questionsIndex: prevState.questionsIndex + 1,
     }));
-
+    console.log(id);
     // se o id for igual a correct-aswer pinta de verde, se não, vermelho.
   }
 
@@ -55,6 +57,13 @@ class Game extends Component {
     }
     return (
       <div>
+        <Header />
+        <div className="App">
+          <div className="App-header">
+            <img src={ logo } className="App-logo" alt="logo" />
+            <p>SUA VEZ</p>
+          </div>
+        </div>
         <h1 data-testid="question-category">{ this.handleQuestions().category }</h1>
         <h2 data-testid="question-text">{ this.handleQuestions().question }</h2>
         <section data-testid="answer-options">

@@ -26,9 +26,12 @@ class Login extends Component {
     const { saveTokenToRedux, playerInfo, history } = this.props;
     await saveTokenToRedux();
 
-    const { getTokenFromStore } = this.props;
+    const { getTokenFromStore, userSave } = this.props;
+
     saveTokenToStorage(getTokenFromStore);
     playerInfo(inputName, inputEmail);
+
+    userSave(inputName, inputEmail);
 
     history.push('/game');
   }
@@ -37,16 +40,17 @@ class Login extends Component {
     const { inputEmail, inputName } = this.state;
     const { history } = this.props;
     return (
-      <div>
-        <div className="App">
-          <header className="App-header">
+      <div className="loginPage">
+        <div className="triviaLogo">
+          <div className="App">
             <img src={ logo } className="App-logo" alt="logo" />
-            <p>SUA VEZ</p>
-          </header>
+          </div>
         </div>
-        <form>
+        <form className="formLogin">
           <label htmlFor="playerName">
             <input
+              placeholder="Nome do Jogador"
+              className="inputLogin"
               id="playerName"
               data-testid="input-player-name"
               value={ inputName }
@@ -57,6 +61,8 @@ class Login extends Component {
           </label>
           <label htmlFor="email">
             <input
+              placeholder="Email"
+              className="inputLogin"
               id="email"
               data-testid="input-gravatar-email"
               value={ inputEmail }
@@ -66,6 +72,7 @@ class Login extends Component {
             />
           </label>
           <button
+            className="button"
             data-testid="btn-play"
             type="button"
             disabled={ !(inputName && inputEmail) }
@@ -75,6 +82,7 @@ class Login extends Component {
           </button>
         </form>
         <button
+          className="button"
           type="button"
           data-testid="btn-settings"
           onClick={ () => history.push('/settings') }

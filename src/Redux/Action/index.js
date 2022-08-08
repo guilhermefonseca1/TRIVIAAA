@@ -4,8 +4,8 @@ export const REQUEST_TOKEN = 'REQUEST_TOKEN';
 export const SAVE_TOKEN = 'SAVE_TOKEN';
 export const FAILED_REQUEST = 'FAILED_REQUEST';
 export const SAVE_PLAYER_INFO = 'SAVE_PLAYER_INFO';
-
 export const GET_QUESTIONS = 'GET_QUESTIONS';
+export const SAVE_USER = 'SAVE_USER';
 
 export const requestToken = () => ({ type: REQUEST_TOKEN });
 
@@ -32,3 +32,8 @@ export const getToken = () => async (dispatch) => {
     dispatch(failedRequest(error));
   }
 };
+
+// export const saveUser = (user, email) => ({
+//   type: SAVE_USER,
+//   payload: { user, email },
+// });
