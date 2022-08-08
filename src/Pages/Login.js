@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getToken } from '../Redux/Action';
+import { getToken, saveUser } from '../Redux/Action';
 import { saveTokenToStorage } from '../tests/helpers/addTokenToStorage';
 import logo from '../trivia.png';
 
@@ -25,9 +25,10 @@ class Login extends Component {
     const { saveTokenToRedux, history } = this.props;
     await saveTokenToRedux();
 
-    const { getTokenFromStore } = this.props;
+    const { getTokenFromStore, userSave } = this.props;
     saveTokenToStorage(getTokenFromStore);
-
+    const { inputEmail, inputName } = this.state;
+    userSave(inputName, inputEmail);
     history.push('/game');
   }
 
@@ -35,14 +36,15 @@ class Login extends Component {
     const { inputEmail, inputName } = this.state;
     const { history } = this.props;
     return (
-      <div>
-        <div className="App">
-          <header className="App-header">
+      <div className="loginPage">
+        <div className="triviaLogo">
+          <div className="App">
+            {/* <header className="App-header"> */}
             <img src={ logo } className="App-logo" alt="logo" />
-            <p>SUA VEZ</p>
-          </header>
+            {/* </header> */}
+          </div>
         </div>
-        <form>
+        <form className="formLogin">
           <label htmlFor="playerName">
             <input
               id="playerName"
@@ -98,6 +100,7 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   saveTokenToRedux: () => dispatch(getToken()),
+  userSave: (user, email) => dispatch(saveUser(user, email)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
