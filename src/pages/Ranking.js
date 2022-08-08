@@ -2,9 +2,25 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 class Ranking extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      ranking: [],
+    };
+  }
+
+  componentDidMount() {
+    const ranking = localStorage.getItem('ranking');
+    if (ranking !== null) {
+      this.setState({
+        ranking: ranking.sort((a, b) => b.score - a.score),
+      });
+    }
+  }
+
   render() {
     const { history } = this.props;
-    const ranking = localStorage.getItem('ranking');
+    const { ranking } = this.state;
     return (
       <div>
         <header>
@@ -12,7 +28,7 @@ class Ranking extends React.Component {
         </header>
         <main>
           {
-            (ranking.length > 0)
+            (ranking !== null && ranking.length > 0)
               ? (
                 <ol>
                   {
@@ -28,14 +44,16 @@ class Ranking extends React.Component {
               )
               : <p>Não há jogadores no ranking ainda</p>
           }
+          <form>
+            <button
+              type="button"
+              data-testid="btn-go-home"
+              onClick={ () => history.push('/') }
+            >
+              Voltar
+            </button>
+          </form>
         </main>
-        <button
-          type="button"
-          data-testid="btn-go-home"
-          onClick={ history.push('/') }
-        >
-          Voltar para tela de Login
-        </button>
       </div>
     );
   }

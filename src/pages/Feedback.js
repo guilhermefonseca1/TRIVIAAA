@@ -26,6 +26,7 @@ class Feedback extends React.Component {
     if (assertions >= MIN_ASSERTIONS) {
       return 'Well Done!';
     } return 'Could be better...';
+  }
 
   handlePlayAgainButton = () => {
     const { history } = this.props;
@@ -41,6 +42,7 @@ class Feedback extends React.Component {
     const { gravatarImageUrl } = this.state;
     const { username, scores } = this.props;
     const altText = `Imagem de ${username}`;
+    const feedback = this.getFeedback();
     return (
       <div>
         <header>
@@ -51,7 +53,7 @@ class Feedback extends React.Component {
           />
 
           <h1 data-testid="feedback-text">
-            { this.getFeedback }
+            {feedback }
           </h1>
           <p data-testid="header-player-name">{ username }</p>
           <p data-testid="header-score">{ scores }</p>
@@ -74,13 +76,13 @@ class Feedback extends React.Component {
     );
   }
 }
-}
 
-mapStateToProps = (store) => ({
+const mapStateToProps = (store) => ({
   username: store.player.name,
   scores: store.player.score,
   email: store.player.gravatarEmail,
   feedbackText: store.player.feedback,
+  assertions: store.player.assertions,
 });
 
 Feedback.propTypes = {
