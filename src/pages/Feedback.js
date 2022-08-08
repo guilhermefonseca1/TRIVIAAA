@@ -20,6 +20,11 @@ class Feedback extends React.Component {
     });
   }
 
+  handlePlayAgainButton = () => {
+    const { history } = this.props;
+    history.push('/');
+  }
+
   render() {
     const { gravatarImageUrl } = this.state;
     const { username, scores } = this.props;
@@ -36,6 +41,13 @@ class Feedback extends React.Component {
           <p data-testid="header-player-name">{ username }</p>
           <p data-testid="header-score">{ scores }</p>
         </header>
+        <button
+          type="button"
+          data-testid="btn-play-again"
+          onClick={ () => this.handlePlayAgainButton() }
+        >
+          Play Again
+        </button>
       </div>
     );
   }
@@ -52,6 +64,9 @@ Feedback.propTypes = {
   username: PropTypes.string.isRequired,
   scores: PropTypes.number.isRequired,
   email: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);
