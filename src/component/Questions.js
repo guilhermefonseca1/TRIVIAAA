@@ -50,6 +50,7 @@ class Questions extends Component {
         classCorrectOption } = this.state;
       const number3 = 3;
       const number05 = 0.5;
+      const testReponse = 'correct-option';
 
       if (teste.response_code === number3) {
         return <Redirect to="/" />;
@@ -74,7 +75,8 @@ class Questions extends Component {
                           type="button"
                           name="correct-answer"
                           data-testid="correct-answer"
-                          disabled={ seconds === 0 }
+                          disabled={ seconds === 0
+                            || classCorrectOption === testReponse }
                           className={ classCorrectOption }
                           onClick={ () => this.handleClickAnswer() }
                         >
@@ -86,13 +88,18 @@ class Questions extends Component {
                           key={ element.index }
                           name="wrong-answer"
                           data-testid="wrong-answer"
-                          disabled={ seconds === 0 }
+                          disabled={ seconds === 0
+                            || classCorrectOption === testReponse }
                           className={ classWrongOptions }
                           onClick={ () => this.handleClickAnswer() }
                         >
                           { element }
                         </button>)))
                 }
+                <br />
+                { seconds === 0
+                || classWrongOptions === 'wrong-options'
+                  ? <button type="button" data-testid="btn-next">Next</button> : ''}
               </div>
             </div>
           </div>);
