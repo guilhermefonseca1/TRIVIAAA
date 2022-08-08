@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { addScore } from '../../redux/actions';
 
 class Questions extends Component {
   constructor() {
@@ -26,6 +29,15 @@ class Questions extends Component {
       return requestJson;
     };
 
+    somaScore = (timer, difficulty) => {
+      const { addScoreDispatch } = this.props;
+      const TRES = 3;
+      const DEZ = 10;
+      if (difficulty === 'easy') return addScoreDispatch(DEZ + (timer * 1));
+      if (difficulty === 'medium') return addScoreDispatch(DEZ + (timer * 2));
+      if (difficulty === 'hard') return addScoreDispatch(DEZ + (timer * TRES));
+    };
+
     render() {
       const { teste, questions } = this.state;
       const number3 = 3;
@@ -43,19 +55,21 @@ class Questions extends Component {
               <p data-testid="question-text">{ questions[0].question }</p>
               <div data-testid="answer-options">
                 {
-                  array.sort(() => number05 - Math.random()).map((element) => (
+                  array.sort(() => number05 - Math.random()).map((element, index) => (
                     element === questions[0].correct_answer
                       ? (
                         <button
                           type="button"
+                          key={ index }
                           data-testid="correct-answer"
+                          onClick={ () => this.somaScore(1, questions[0].difficulty) }
                         >
                           { element }
                         </button>)
                       : (
                         <button
                           type="button"
-                          key={ element.index }
+                          key={ index }
                           data-testid="wrong-answer"
                         >
                           { element }
@@ -69,4 +83,12 @@ class Questions extends Component {
     }
 }
 
-export default Questions;
+Questions.propTypes = {
+  addScoreDispatch: propTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  addScoreDispatch: (score) => dispatch(addScore(score)),
+});
+
+export default connect(null, mapDispatchToProps)(Questions);

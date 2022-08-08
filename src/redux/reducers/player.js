@@ -15,6 +15,11 @@ const player = (state = INITIAL_STATE, action) => {
       name: action.name,
       gravatarEmail: action.gravatarEmail,
     });
+  case actionTypes.ADD_SCORE:
+    return ({
+      ...state,
+      score: state.score + action.score,
+    });
   default:
     return state;
   }
