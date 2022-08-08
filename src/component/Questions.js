@@ -7,12 +7,21 @@ class Questions extends Component {
     this.state = {
       teste: '',
       questions: '',
+      classWrongOptions: 'options',
+      classCorrectOption: 'options',
     };
   }
 
   componentDidMount() {
     const tokenGame = localStorage.getItem('token');
     this.getQuestions(tokenGame);
+  }
+
+  handleClickAnswer = () => {
+    this.setState({
+      classCorrectOption: 'correct-option',
+      classWrongOptions: 'wrong-options',
+    });
   }
 
     getQuestions = async (token) => {
@@ -27,7 +36,7 @@ class Questions extends Component {
     };
 
     render() {
-      const { teste, questions } = this.state;
+      const { teste, questions, classWrongOptions, classCorrectOption } = this.state;
       const number3 = 3;
       const number05 = 0.5;
 
@@ -48,7 +57,10 @@ class Questions extends Component {
                       ? (
                         <button
                           type="button"
+                          name="correct-answer"
                           data-testid="correct-answer"
+                          className={ classCorrectOption }
+                          onClick={ () => this.handleClickAnswer() }
                         >
                           { element }
                         </button>)
@@ -56,7 +68,10 @@ class Questions extends Component {
                         <button
                           type="button"
                           key={ element.index }
+                          name="wrong-answer"
                           data-testid="wrong-answer"
+                          className={ classWrongOptions }
+                          onClick={ () => this.handleClickAnswer() }
                         >
                           { element }
                         </button>)))

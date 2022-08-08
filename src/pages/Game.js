@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 import { connect } from 'react-redux';
-import Questions from './component/Questions';
+import Questions from '../component/Questions';
 
 class Game extends React.Component {
   constructor() {
