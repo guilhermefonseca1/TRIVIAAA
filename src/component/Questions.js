@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { addScore } from '../../redux/actions';
+import { addScore } from '../redux/actions';
 
 class Questions extends Component {
   constructor() {
@@ -10,12 +10,21 @@ class Questions extends Component {
     this.state = {
       teste: '',
       questions: '',
+      classWrongOptions: 'options',
+      classCorrectOption: 'options',
     };
   }
 
   componentDidMount() {
     const tokenGame = localStorage.getItem('token');
     this.getQuestions(tokenGame);
+  }
+
+  handleClickAnswer = () => {
+    this.setState({
+      classCorrectOption: 'correct-option',
+      classWrongOptions: 'wrong-options',
+    });
   }
 
     getQuestions = async (token) => {
@@ -39,7 +48,7 @@ class Questions extends Component {
     };
 
     render() {
-      const { teste, questions } = this.state;
+      const { teste, questions, classWrongOptions, classCorrectOption } = this.state;
       const number3 = 3;
       const number05 = 0.5;
 
@@ -61,8 +70,13 @@ class Questions extends Component {
                         <button
                           type="button"
                           key={ index }
+                          name="correct-answer"
                           data-testid="correct-answer"
-                          onClick={ () => this.somaScore(1, questions[0].difficulty) }
+                          className={ classCorrectOption }
+                          onClick={ () => {
+                            this.handleClickAnswer();
+                            this.somaScore(1, questions[0].difficulty);
+                          } }
                         >
                           { element }
                         </button>)
@@ -70,7 +84,10 @@ class Questions extends Component {
                         <button
                           type="button"
                           key={ index }
+                          name="wrong-answer"
                           data-testid="wrong-answer"
+                          className={ classWrongOptions }
+                          onClick={ () => this.handleClickAnswer() }
                         >
                           { element }
                         </button>)))
