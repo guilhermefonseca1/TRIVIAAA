@@ -9,6 +9,12 @@ const token = {
   "response_message":"Token Generated Successfully!",
   "token":"f00cb469ce38726ee00a7c6836761b0a4fb808181a125dcde6d50a9f3c9127b6",
 };
+const { store } = renderWithRouterAndRedux(<Login />);
+
+jest.spyOn(global, 'fetch');
+  global.fetch.mockResolvedValue({
+    json: jest.fn().mockResolvedValue({ token }),
+  });
 
 
 describe('Testando as configurações do componente Login', () => {
@@ -55,38 +61,56 @@ describe('Testando as configurações do componente Login', () => {
 
     const buttonConfiguracoes = screen.getByRole('button', { name: 'Configurações'});
     const buttonClickPlay = screen.getByRole('button', { name: 'Play'});
-
+    
     userEvent.click(buttonConfiguracoes);
     userEvent.click(buttonClickPlay);
+
+    const buttonTextConfiguracoes = screen.getByText(/Configurações/i);
+    expect(buttonTextConfiguracoes).toBeInTheDocument();
   })
 
   it('Testando os textos da página de login', () => {
     renderWithRouterAndRedux(<App />);
 
-    const suaVez = screen.getByText(/SUA VEZ/i);
+    // const suaVez = screen.getByText(/SUA VEZ/i);
     const labelEmail = screen.getByLabelText('Email:');
     const labelName = screen.getByLabelText('Name:');
 
-    expect(suaVez).toBeInTheDocument();
+    // expect(suaVez).toBeInTheDocument();
     expect(labelEmail).toBeInTheDocument();
     expect(labelName).toBeInTheDocument();
 
   })
 
-  it('login', () => {
+  it('Teste se o input funciona', async() => {
     renderWithRouterAndRedux(<App />);
 
-    const testeToken = JSON.parse(localStorage.getItem('token'));
+    const inputPlayerName = screen.getByTestId('input-player-name');
+    const inputGravatarEmail = screen.getByTestId('input-gravatar-email');
+    const buttonPlay = screen.getByRole('button', { name: 'Play'});
 
-    expect(testeToken).toBeDefined();
-    expect(storageToken).toBe(mockToken["token"]);
+    userEvent.type(inputPlayerName, 'nome');
+    userEvent.type(inputGravatarEmail, 'email');
+    expect(inputPlayerName).toHaveValue('nome');
+    expect(inputGravatarEmail).toHaveValue('email');
+
+    userEvent.click(buttonPlay);
+
+    const getPlayerName = screen.getByText('nome');
+    const email = screen.getByText('email');
+
+    expect(getPlayerName && email).toBeInTheDocument();
+
+  })
+
+  // it('login', () => {
+  //   renderWithRouterAndRedux(<App />);
+
+  //   const testeToken = JSON.parse(localStorage.getItem('token'));
+
+  //   expect(testeToken).toBeDefined();
+  //   expect(storageToken).toBe(mockToken["token"]);
 
 
 
   })
-
-
-
-})
-
-

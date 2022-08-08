@@ -3,6 +3,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import logo from '../trivia.png';
+import '../Style/Game.css';
+
+const correctAnswerColor = 'correct-answer';
+
+// const sleep = (ms) => new Promise(
+//   (resolve) => setTimeout(resolve, ms),
+// );
 
 class Game extends Component {
   constructor() {
@@ -10,6 +17,8 @@ class Game extends Component {
 
     this.state = {
       questionsIndex: 0,
+      correct: '',
+      wrong: '',
     };
   }
 
@@ -36,15 +45,20 @@ class Game extends Component {
   handleClick = ({ target }) => {
     const { id } = target;
 
-    this.setState((prevState) => ({
-      questionsIndex: prevState.questionsIndex + 1,
-    }));
-    console.log(id);
-    // se o id for igual a correct-aswer pinta de verde, se não, vermelho.
+    if (id === correctAnswerColor) {
+      target.classList.add('correct');
+    } else {
+      target.classList.add('wrong');
+    }
+    // await sleep(1000);
+    this.setState({
+      correct: 'correct',
+      wrong: 'wrong',
+    });
   }
 
   render() {
-    const { questionsIndex } = this.state;
+    const { questionsIndex, wrong, correct } = this.state;
     const { getGameData, history } = this.props;
 
     if (getGameData.length === 0) {
@@ -70,14 +84,20 @@ class Game extends Component {
           {
             this.handleMultipleOptions().map((el, index) => (
               <button
+                className={ el === this.handleQuestions().correct_answer
+                  ? correct
+                  : wrong }
                 key={ el }
                 type="button"
                 data-testid={ el === this.handleQuestions().correct_answer
-                  ? 'correct-answer'
+                  ? correctAnswerColor
                   : `wrong-answer-${index}` }
                 id={ el === this.handleQuestions().correct_answer
-                  ? 'correct-answer'
-                  : `wrong-answer-${index}` }
+                  ? correctAnswerColor
+                  : 'wrong-answer' }
+                // className={ el === this.handleQuestions().correct_answer
+                //   ? 'correct'
+                //   : 'wrong' }
                 onClick={ this.handleClick }
               >
                 { el }
