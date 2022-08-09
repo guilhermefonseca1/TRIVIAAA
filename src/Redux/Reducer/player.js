@@ -5,7 +5,7 @@ import { SAVE_PLAYER_INFO, GET_SCORE_POINTS, GET_NEXT_BTN_CLICK,
 
 const INITIAL_STATE = {
   name: '',
-  assertions: '',
+  assertions: 0,
   score: 0,
   gravatarEmail: '',
   nextBtnClick: false,
