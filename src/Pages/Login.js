@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getToken, savePlayerInfo } from '../Redux/Action';
 import { saveTokenToStorage } from '../tests/helpers/addTokenToStorage';
 import logo from '../trivia.png';
+import '../Style/Login.css';
 
 class Login extends Component {
   constructor() {
@@ -46,7 +47,6 @@ class Login extends Component {
         </div>
         <form className="formLogin">
           <label htmlFor="playerName">
-            Name:
             <input
               placeholder="Nome do Jogador"
               className="inputLogin"
@@ -59,7 +59,6 @@ class Login extends Component {
             />
           </label>
           <label htmlFor="email">
-            Email:
             <input
               placeholder="Email"
               className="inputLogin"
