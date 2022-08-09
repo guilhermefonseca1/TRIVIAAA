@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { MD5 } from 'crypto-js';
+// import { MD5 } from 'crypto-js';
 import Header from '../components/Header';
-import Ranking from './Ranking';
+// import Ranking from './Ranking';
 
 class Feedback extends Component {
     countAsserts = () => {
@@ -15,15 +15,16 @@ class Feedback extends Component {
       return 'Well Done!';
     };
 
-    handleLocalStorageRanking = () => {
-      const { name, email, score, history } = this.props;
-      const gravatar = MD5(email).toString();
-      const ranking = [name, score, gravatar];
-      // const token = localStorage.getItem('token');
-      // console.log(name);
-      localStorage.setItem('ranking', JSON.stringify(ranking));
-      // history.push('/ranking');
-    }
+    // handleLocalStorageRanking = () => {
+    //   const { name, email, score, history } = this.props;
+    //   const gravatar = MD5(email).toString();
+    //   const ranking = [{ name, score, gravatar }];
+    //   const token = localStorage.getItem('token');
+    //   const obj = { ranking, token };
+
+    //   localStorage.setItem('ranking', JSON.stringify(obj));
+    //   history.push('/ranking');
+    // }
 
     render() {
       const { count, score, history } = this.props;
@@ -33,7 +34,7 @@ class Feedback extends Component {
           <h1
             data-testid="feedback-text"
           >
-            { this.countAsserts }
+            { this.countAsserts() }
           </h1>
           <h2> Your score: </h2>
           <h2
@@ -57,7 +58,7 @@ class Feedback extends Component {
           <button
             data-testid="btn-ranking"
             type="button"
-            onClick={ this.handleLocalStorageRanking }
+            onClick={ () => history.push('/ranking') }
           >
             Ranking
           </button>
@@ -75,8 +76,8 @@ Feedback.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (store) => ({
-  count: store.assertions,
-  score: store.score,
+  count: store.player.assertions,
+  score: store.player.score,
   name: store.player.name,
   email: store.player.gravatarEmail,
 });

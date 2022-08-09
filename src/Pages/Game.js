@@ -109,8 +109,8 @@ class Game extends Component {
             ))
           }
           {
-            showNextBtn &&
-            <button
+            showNextBtn
+            && <button
               type="button"
               data-testid="btn-next"
               onClick={ this.handleNextBtnClick }
