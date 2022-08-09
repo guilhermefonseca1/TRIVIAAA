@@ -52,8 +52,8 @@ class Game extends Component {
       const totalScore = 10 + ( timer * multiplier);
 
       dispatch(getAssertions());
-      dispatch(getScorePoints(totalScore))
-    };
+      dispatch(getScorePoints(totalScore));
+    }
   }
 
   handleNextBtnClick = () => {
@@ -77,7 +77,7 @@ class Game extends Component {
       return <h1>Invalid Token</h1>;
     }
     if (questionsIndex === getGameData.length) {
-      history.push('/feedback')
+      history.push('/feedback');
       return <h1> End Game </h1>;
     }
     return (

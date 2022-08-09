@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { MD5 } from 'crypto-js';
 import Header from '../components/Header';
+import Ranking from './Ranking';
 
 class Feedback extends Component {
     countAsserts = () => {
@@ -12,6 +14,16 @@ class Feedback extends Component {
       }
       return 'Well Done!';
     };
+
+    handleLocalStorageRanking = () => {
+      const { name, email, score, history } = this.props;
+      const gravatar = MD5(email).toString();
+      const ranking = [name, score, gravatar];
+      // const token = localStorage.getItem('token');
+      // console.log(name);
+      localStorage.setItem('ranking', JSON.stringify(ranking));
+      // history.push('/ranking');
+    }
 
     render() {
       const { count, score, history } = this.props;
@@ -45,7 +57,7 @@ class Feedback extends Component {
           <button
             data-testid="btn-ranking"
             type="button"
-            onClick={ () => history.push('/ranking') }
+            onClick={ this.handleLocalStorageRanking }
           >
             Ranking
           </button>
@@ -65,6 +77,8 @@ Feedback.propTypes = {
 const mapStateToProps = (store) => ({
   count: store.assertions,
   score: store.score,
+  name: store.player.name,
+  email: store.player.gravatarEmail,
 });
 
 export default connect(mapStateToProps)(Feedback);
