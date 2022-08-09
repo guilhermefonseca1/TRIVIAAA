@@ -46,7 +46,6 @@ class Login extends Component {
         </div>
         <form className="formLogin">
           <label htmlFor="playerName">
-            Name:
             <input
               placeholder="Nome do Jogador"
               className="inputLogin"
@@ -59,7 +58,6 @@ class Login extends Component {
             />
           </label>
           <label htmlFor="email">
-            Email:
             <input
               placeholder="Email"
               className="inputLogin"
