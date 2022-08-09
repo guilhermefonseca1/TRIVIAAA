@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import logo from '../trivia.png';
 import '../Style/Game.css';
-import { getNextBtnClick, getScorePoints } from '../Redux/Action';
+import { getAssertions, getNextBtnClick, getScorePoints } from '../Redux/Action';
 import Timer from '../components/Timer';
 class Game extends Component {
   constructor(props) {
@@ -40,14 +40,21 @@ class Game extends Component {
 
   handleAnswersClick = ({ target }) => {
     const { id } = target;
-    const { dispatch } = this.props;
+    const { dispatch, timer } = this.props;
+    const { difficulty } = this.handleQuestions();
 
     this.setState({
       correct: 'correct',
       wrong: 'wrong',
       showNextBtn: true,
     });
-    if (id === 'correct') dispatch(getScorePoints());
+    if (id === 'correct') {
+      const multiplier = difficulty === 'easy' ? 1 : difficulty === 'medium' ? 2 : 3;
+      const totalScore = 10 + ( timer * multiplier);
+
+      dispatch(getAssertions());
+      dispatch(getScorePoints(totalScore))
+    };
   }
 
   handleNextBtnClick = () => {
@@ -58,7 +65,7 @@ class Game extends Component {
       questionsIndex: prevState.questionsIndex + 1,
       showNextBtn: false,
     }));
-    dispatch(getNextBtnClick());
+    dispatch(getNextBtnClick(true));
   }
 
   render() {
@@ -133,6 +140,7 @@ Game.propTypes = {
 const mapStateToProps = (store) => ({
   getGameData: store.asks.results,
   isDisabled: store.player.isDisabled,
+  timer: store.player.timer,
 });
 
 export default connect(mapStateToProps)(Game);

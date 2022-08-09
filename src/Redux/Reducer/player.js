@@ -1,5 +1,7 @@
 import { SAVE_PLAYER_INFO, GET_SCORE_POINTS, GET_NEXT_BTN_CLICK,
-  HANDLE_DISABLE_BTNS } from '../Action';
+  HANDLE_DISABLE_BTNS,
+  GET_TIMER,
+  GET_ASSERTIONS } from '../Action';
 
 const INITIAL_STATE = {
   name: '',
@@ -8,6 +10,7 @@ const INITIAL_STATE = {
   gravatarEmail: '',
   nextBtnClick: false,
   isDisabled: false,
+  timer: 30,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -21,19 +24,28 @@ const player = (state = INITIAL_STATE, action) => {
   case GET_SCORE_POINTS:
     return {
       ...state,
-      score: state.score + 1,
+      score: state.score + action.score,
     };
   case GET_NEXT_BTN_CLICK:
     console.log(state.nextBtnClick);
     return {
       ...state,
-      nextBtnClick: !state.nextBtnClick,
+      nextBtnClick: state.bool,
     };
   case HANDLE_DISABLE_BTNS:
-    console.log(action.bool);
     return {
       ...state,
       isDisabled: action.bool,
+    };
+  case GET_TIMER:
+    return {
+      ...state,
+      timer: action.timer,
+    };
+  case GET_ASSERTIONS:
+    return {
+      ...state,
+      assertions: state.assertions + 1,
     };
   default:
     return state;

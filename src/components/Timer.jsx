@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleDisableBtns } from '../Redux/Action';
+import { getTimer, handleDisableBtns } from '../Redux/Action';
 
 class Timer extends Component {
   constructor() {
@@ -21,6 +21,7 @@ class Timer extends Component {
         timer: prevState.timer - 1,
       }), () => {
         const { timer } = this.state;
+        dispatch(getTimer(timer));
         console.log(resetTimer);
         if (timer === 0) {
           clearInterval(this.timer);
