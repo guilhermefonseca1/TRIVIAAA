@@ -4,21 +4,17 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import logo from '../trivia.png';
 import '../Style/Game.css';
-
-const correctAnswerColor = 'correct-answer';
-
-// const sleep = (ms) => new Promise(
-//   (resolve) => setTimeout(resolve, ms),
-// );
-
+import { getNextBtnClick, getScorePoints } from '../Redux/Action';
+import Timer from '../components/Timer';
 class Game extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       questionsIndex: 0,
       correct: '',
       wrong: '',
+      nextBtn: false,
     };
   }
 
@@ -42,24 +38,32 @@ class Game extends Component {
     return answersArr;
   }
 
-  handleClick = ({ target }) => {
+  handleAnswersClick = ({ target }) => {
     const { id } = target;
+    const { dispatch } = this.props;
 
-    if (id === correctAnswerColor) {
-      target.classList.add('correct');
-    } else {
-      target.classList.add('wrong');
-    }
-    // await sleep(1000);
     this.setState({
       correct: 'correct',
       wrong: 'wrong',
+      showNextBtn: true,
     });
+    if (id === 'correct') dispatch(getScorePoints());
+  }
+
+  handleNextBtnClick = () => {
+    const { dispatch } = this.props;
+    this.setState((prevState) => ({
+      correct: '',
+      wrong: '',
+      questionsIndex: prevState.questionsIndex + 1,
+      showNextBtn: false,
+    }));
+    dispatch(getNextBtnClick());
   }
 
   render() {
-    const { questionsIndex, wrong, correct } = this.state;
-    const { getGameData, history } = this.props;
+    const { questionsIndex, wrong, correct, showNextBtn } = this.state;
+    const { getGameData, history, isDisabled } = this.props;
 
     if (getGameData.length === 0) {
       localStorage.removeItem('token');
@@ -67,11 +71,13 @@ class Game extends Component {
       return <h1>Invalid Token</h1>;
     }
     if (questionsIndex === getGameData.length) {
+      history.push('/feedback')
       return <h1> End Game </h1>;
     }
     return (
       <div>
         <Header />
+        <Timer isDisabled={ this.isDisabled } />
         <div className="App">
           <div className="App-header">
             <img src={ logo } className="App-logo" alt="logo" />
@@ -90,19 +96,27 @@ class Game extends Component {
                 key={ el }
                 type="button"
                 data-testid={ el === this.handleQuestions().correct_answer
-                  ? correctAnswerColor
+                  ? 'correct-answer'
                   : `wrong-answer-${index}` }
                 id={ el === this.handleQuestions().correct_answer
-                  ? correctAnswerColor
-                  : 'wrong-answer' }
-                // className={ el === this.handleQuestions().correct_answer
-                //   ? 'correct'
-                //   : 'wrong' }
-                onClick={ this.handleClick }
+                  ? 'correct'
+                  : 'wrong' }
+                onClick={ this.handleAnswersClick }
+                disabled={ isDisabled }
               >
                 { el }
               </button>
             ))
+          }
+          {
+            showNextBtn &&
+            <button
+              type="button"
+              data-testid="btn-next"
+              onClick={ this.handleNextBtnClick }
+            >
+              Next
+            </button>
           }
         </section>
       </div>
@@ -118,6 +132,7 @@ Game.propTypes = {
 
 const mapStateToProps = (store) => ({
   getGameData: store.asks.results,
+  isDisabled: store.player.isDisabled,
 });
 
 export default connect(mapStateToProps)(Game);
