@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
-import logo from '../trivia.png';
 import '../Style/Game.css';
 import { getAssertions, getNextBtnClick, getScorePoints } from '../Redux/Action';
 import Timer from '../components/Timer';
@@ -84,13 +83,7 @@ class Game extends Component {
     return (
       <div>
         <Header />
-        <Timer isDisabled={ this.isDisabled } />
-        <div className="App">
-          <div className="App-header">
-            <img src={ logo } className="App-logo" alt="logo" />
-            <p>SUA VEZ</p>
-          </div>
-        </div>
+        <Timer />
         <h1 data-testid="question-category">{ this.handleQuestions().category }</h1>
         <h2 data-testid="question-text">{ this.handleQuestions().question }</h2>
         <section data-testid="answer-options">

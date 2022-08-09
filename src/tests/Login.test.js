@@ -2,19 +2,9 @@ import { screen } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import App from "../App";
+import Login from '../Pages/Login';
 import renderWithRouterAndRedux from "./helpers/renderWithRouterAndRedux";
-
-const token = {
-  "response_code":0,
-  "response_message":"Token Generated Successfully!",
-  "token":"f00cb469ce38726ee00a7c6836761b0a4fb808181a125dcde6d50a9f3c9127b6",
-};
-const { store } = renderWithRouterAndRedux(<Login />);
-
-jest.spyOn(global, 'fetch');
-  global.fetch.mockResolvedValue({
-    json: jest.fn().mockResolvedValue({ token }),
-  });
+import testeToken from './testeToken/testeToken';
 
 
 describe('Testando as configurações do componente Login', () => {
@@ -39,8 +29,6 @@ describe('Testando as configurações do componente Login', () => {
     it('Testando se os botões dos componentes redirecionam corretamente', () => {
     
     renderWithRouterAndRedux(<App />);
-    // const { pathname } = renderGame.history.location;
-    // expect(pathname).toBe('/game');
 
     const inputPlayerName = screen.getByTestId('input-player-name');
     const inputGravatarEmail = screen.getByTestId('input-gravatar-email');
@@ -72,11 +60,9 @@ describe('Testando as configurações do componente Login', () => {
   it('Testando os textos da página de login', () => {
     renderWithRouterAndRedux(<App />);
 
-    // const suaVez = screen.getByText(/SUA VEZ/i);
     const labelEmail = screen.getByLabelText('Email:');
     const labelName = screen.getByLabelText('Name:');
 
-    // expect(suaVez).toBeInTheDocument();
     expect(labelEmail).toBeInTheDocument();
     expect(labelName).toBeInTheDocument();
 
@@ -103,14 +89,17 @@ describe('Testando as configurações do componente Login', () => {
 
   })
 
-  // it('login', () => {
-  //   renderWithRouterAndRedux(<App />);
+})
+describe('Testa se na página de login há data-test', () => {
+  window.fetch = jest.fn(async () => ({
+    json: async () => testeToken,
+  }))
 
-  //   const testeToken = JSON.parse(localStorage.getItem('token'));
+  it('Verifica se há o data-test: input-player-name na página de Login', () => { 
+    renderWithRouterAndRedux(<Login />);
+    const name = screen.getByTestId('input-player-name');
 
-  //   expect(testeToken).toBeDefined();
-  //   expect(storageToken).toBe(mockToken["token"]);
-
-
-
+    expect(name).toBeDefined()
   })
+})
+

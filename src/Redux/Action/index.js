@@ -30,7 +30,7 @@ export const handleDisableBtns = (bool) => ({ type: HANDLE_DISABLE_BTNS, bool })
 
 export const getTimer = (timer) => ({ type: GET_TIMER, timer });
 
-export const getAssertions = () => ({ tyoe: GET_ASSERTIONS });
+export const getAssertions = () => ({ type: GET_ASSERTIONS });
 
 export const getToken = () => async (dispatch) => {
   dispatch(requestToken);
