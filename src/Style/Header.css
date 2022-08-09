@@ -44,9 +44,9 @@
 }
 
 .score {
-  background-color: rebeccapurple;
-  margin: 20px;
-  display: flex;
   align-items: center;
+  background-color: rebeccapurple;
+  display: flex;
+  margin: 20px;
   padding: 5px;
 }

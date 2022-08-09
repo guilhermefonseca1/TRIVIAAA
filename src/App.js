@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Feedback from './Pages/Feedback';
 import Game from './Pages/Game';
 import Login from './Pages/Login';
 import Settings from './Pages/Settings';
-import Feedback from './Pages/Feedback';
 
 export default function App() {
   return (
