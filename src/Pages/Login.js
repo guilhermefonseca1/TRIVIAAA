@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getToken, savePlayerInfo } from '../Redux/Action';
 import { saveTokenToStorage } from '../tests/helpers/addTokenToStorage';
 import logo from '../trivia.png';
+import '../Style/Login.css';
 
 class Login extends Component {
   constructor() {
