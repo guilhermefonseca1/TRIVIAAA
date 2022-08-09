@@ -59,7 +59,7 @@ class Game extends Component {
     });
     if (id === 'correct') {
       const baseScorePoints = 10;
-      const multiplier = getMultiplier(difficulty);
+      const multiplier = this.getMultiplier(difficulty);
       const totalScore = baseScorePoints + (timer * multiplier);
 
       dispatch(getAssertions());

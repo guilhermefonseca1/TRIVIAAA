@@ -21,7 +21,7 @@ class Feedback extends Component {
           <h1
             data-testid="feedback-text"
           >
-            { this.countAsserts }
+            { this.countAsserts() }
           </h1>
           <h2> Your score: </h2>
           <h2
@@ -29,7 +29,7 @@ class Feedback extends Component {
           >
             {score}
           </h2>
-          <h2> Your score: </h2>
+          <h2> You hit: </h2>
           <h2
             data-testid="feedback-total-question"
           >
@@ -63,8 +63,8 @@ Feedback.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (store) => ({
-  count: store.assertions,
-  score: store.score,
+  count: store.player.assertions,
+  score: store.player.score,
 });
 
 export default connect(mapStateToProps)(Feedback);
