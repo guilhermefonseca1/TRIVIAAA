@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import '../Style/Game.css';
 import { getAssertions, getNextBtnClick, getScorePoints } from '../Redux/Action';
 import Timer from '../components/Timer';
+
 class Game extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +14,7 @@ class Game extends Component {
       questionsIndex: 0,
       correct: '',
       wrong: '',
-      nextBtn: false,
+      // nextBtn: false,
     };
   }
 
@@ -37,24 +38,34 @@ class Game extends Component {
     return answersArr;
   }
 
-  handleAnswersClick = ({ target }) => {
-    const { id } = target;
-    const { dispatch, timer } = this.props;
-    const { difficulty } = this.handleQuestions();
-
-    this.setState({
-      correct: 'correct',
-      wrong: 'wrong',
-      showNextBtn: true,
-    });
-    if (id === 'correct') {
-      const multiplier = difficulty === 'easy' ? 1 : difficulty === 'medium' ? 2 : 3;
-      const totalScore = 10 + ( timer * multiplier);
-
-      dispatch(getAssertions());
-      dispatch(getScorePoints(totalScore))
-    };
+  getMultiplier = (difficulty) => {
+    const easyNum = 1;
+    const mediumNum = 2;
+    const hardNum = 3;
+    if (difficulty === 'easy') return easyNum;
+    if (difficulty === 'medium') return mediumNum;
+    if (difficulty === 'hard') return hardNum;
   }
+
+    handleAnswersClick = ({ target }) => {
+      const { id } = target;
+      const { dispatch, timer } = this.props;
+      const { difficulty } = this.handleQuestions();
+
+      this.setState({
+        correct: 'correct',
+        wrong: 'wrong',
+        showNextBtn: true,
+      });
+      if (id === 'correct') {
+        const baseScorePoints = 10;
+        const multiplier = this.getMultiplier(difficulty);
+        const totalScore = baseScorePoints + (timer * multiplier);
+
+        dispatch(getAssertions());
+        dispatch(getScorePoints(totalScore));
+      }
+    }
 
   handleNextBtnClick = () => {
     const { dispatch } = this.props;
@@ -77,7 +88,7 @@ class Game extends Component {
       return <h1>Invalid Token</h1>;
     }
     if (questionsIndex === getGameData.length) {
-      history.push('/feedback')
+      history.push('/feedback');
       return <h1> End Game </h1>;
     }
     return (
@@ -109,14 +120,16 @@ class Game extends Component {
             ))
           }
           {
-            showNextBtn &&
-            <button
-              type="button"
-              data-testid="btn-next"
-              onClick={ this.handleNextBtnClick }
-            >
-              Next
-            </button>
+            showNextBtn
+            && (
+              <button
+                type="button"
+                data-testid="btn-next"
+                onClick={ this.handleNextBtnClick }
+              >
+                Next
+              </button>
+            )
           }
         </section>
       </div>
