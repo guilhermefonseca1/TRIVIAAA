@@ -44,7 +44,7 @@ body {
 
 .loginPage {
   align-items: center;
-  background-color: #282c34;
+  background-color: #757e88;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -66,7 +66,7 @@ body {
 }
 
 .button {
-  background-color: #df9a1b;
+  background-color: #57a342;
   border: none;
   border-radius: 5px;
   color: white;
@@ -79,10 +79,10 @@ body {
 
 .button:hover {
   animation: shake infinite 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  background-color: #e89c0fc7;
+  background-color: #438331;
 }
 
 .button:disabled {
   animation: none;
-  background-color: #d8b778;
+  background-color: #92d57f;
 }

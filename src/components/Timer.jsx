@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { RiTimer2Line } from 'react-icons/ri';
 import { connect } from 'react-redux';
 import { getNextBtnClick, getTimer, handleDisableBtns } from '../Redux/Action';
+import '../Style/Timer.css';
 
 class Timer extends Component {
   constructor() {
@@ -44,7 +46,8 @@ class Timer extends Component {
   render() {
     const { timer } = this.state;
     return (
-      <div>
+      <div className="conteinerTimer">
+        <RiTimer2Line className="timer" />
         <h1>{ timer }</h1>
       </div>
     );
