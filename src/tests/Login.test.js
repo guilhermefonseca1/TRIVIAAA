@@ -13,12 +13,10 @@ describe('Testando as configurações do componente Login', () => {
       const testeRender = renderWithRouterAndRedux(<App />);
       
       const inputPlayerName = screen.getByTestId('input-player-name');
-      const inputGravatarEmail = screen.getByTestId('input-gravatar-email');
       const buttonPlay = screen.getByRole('button', { name: 'Play'});
       const buttonConfiguracoes = screen.getByRole('button', { name: 'Configurações'})
 
       expect(inputPlayerName).toBeInTheDocument();
-      expect(inputGravatarEmail).toBeInTheDocument();
       expect(buttonPlay).toBeInTheDocument();
       expect(buttonConfiguracoes).toBeInTheDocument();
     
@@ -56,7 +54,6 @@ describe('Testando as configurações do componente Login', () => {
     const buttonTextConfiguracoes = screen.getByText(/Configurações/i);
     expect(buttonTextConfiguracoes).toBeInTheDocument();
   })
-
   it('Testando os textos da página de login', () => {
     renderWithRouterAndRedux(<App />);
 
@@ -67,7 +64,6 @@ describe('Testando as configurações do componente Login', () => {
     expect(labelName).toBeInTheDocument();
 
   })
-
   it('Teste se o input funciona', async() => {
     renderWithRouterAndRedux(<App />);
 
@@ -100,4 +96,3 @@ describe('Testa se na página de login há data-test', () => {
     expect(name).toBeDefined()
   })
 })
-
