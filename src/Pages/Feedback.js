@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { MD5 } from 'crypto-js';
+import { MD5 } from 'crypto-js';
 import Header from '../components/Header';
+import { getAssertions, getScorePoints } from '../Redux/Action';
 // import Ranking from './Ranking';
 
 class Feedback extends Component {
@@ -15,19 +16,37 @@ class Feedback extends Component {
       return 'Well Done!';
     };
 
-    // handleLocalStorageRanking = () => {
-    //   const { name, email, score, history } = this.props;
-    //   const gravatar = MD5(email).toString();
-    //   const ranking = [{ name, score, gravatar }];
-    //   const token = localStorage.getItem('token');
-    //   const obj = { ranking, token };
+    handleLocalStorageRanking = () => {
+      const { name, email, score, history } = this.props;
+      const gravatar = MD5(email).toString();
+      const ranking = { name, score, gravatar };
 
-    //   localStorage.setItem('ranking', JSON.stringify(obj));
-    //   history.push('/ranking');
-    // }
+      const token = localStorage.getItem('token');
+      const playerInfo = { ranking, token };
+
+      if (!localStorage.getItem('players')) {
+        localStorage.setItem('players', '[]');
+      }
+      const loadPlayers = JSON.parse(localStorage.getItem('players'));
+      const saveNewPlayers = [...loadPlayers, playerInfo];
+
+      localStorage.setItem('players', JSON.stringify(saveNewPlayers));
+      history.push('/ranking');
+    }
+
+    handlePlayAgainBtn = () => {
+      const { history, score, dispatch, count } = this.props;
+      const negative = -1;
+      const resetScore = score * negative;
+      const resetAssertions = count * negative;
+
+      dispatch(getScorePoints(resetScore));
+      dispatch(getAssertions(resetAssertions));
+      history.push('/');
+    }
 
     render() {
-      const { count, score, history } = this.props;
+      const { count, score } = this.props;
       return (
         <div>
           <Header />
@@ -51,14 +70,14 @@ class Feedback extends Component {
           <button
             data-testid="btn-play-again"
             type="button"
-            onClick={ () => history.push('/') }
+            onClick={ this.handlePlayAgainBtn }
           >
             Play Again
           </button>
           <button
             data-testid="btn-ranking"
             type="button"
-            onClick={ () => history.push('/ranking') }
+            onClick={ this.handleLocalStorageRanking }
           >
             Ranking
           </button>

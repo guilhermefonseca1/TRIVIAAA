@@ -31,7 +31,7 @@ export const handleDisableBtns = (bool) => ({ type: HANDLE_DISABLE_BTNS, bool })
 
 export const getTimer = (timer) => ({ type: GET_TIMER, timer });
 
-export const getAssertions = () => ({ type: GET_ASSERTIONS });
+export const getAssertions = (addPoint) => ({ type: GET_ASSERTIONS, addPoint });
 
 export const stopTimer = () => ({ type: STOP_TIMER });
 
