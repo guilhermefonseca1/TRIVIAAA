@@ -54,7 +54,16 @@ describe('Testando as configurações do componente Login', () => {
     const buttonTextConfiguracoes = screen.getByText(/Configurações/i);
     expect(buttonTextConfiguracoes).toBeInTheDocument();
   })
+  it('Testando os textos da página de login', () => {
+    renderWithRouterAndRedux(<App />);
 
+    const labelEmail = screen.getByPlaceholderText('Email')
+    const labelName = screen.getByPlaceholderText('Nome do Jogador');
+
+    expect(labelEmail).toBeInTheDocument();
+    expect(labelName).toBeInTheDocument();
+
+  })
   it('Teste se o input funciona', async() => {
     renderWithRouterAndRedux(<App />);
 
@@ -69,8 +78,11 @@ describe('Testando as configurações do componente Login', () => {
 
     userEvent.click(buttonPlay);
 
-  })
+    const getPlayerName = screen.getByText('nome');
+    const email = screen.getByText('email');
 
+    expect(getPlayerName && email).toBeInTheDocument();
+  })
 })
 describe('Testa se na página de login há data-test', () => {
   window.fetch = jest.fn(async () => ({
@@ -84,4 +96,3 @@ describe('Testa se na página de login há data-test', () => {
     expect(name).toBeDefined()
   })
 })
-

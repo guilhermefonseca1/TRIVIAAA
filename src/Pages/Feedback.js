@@ -42,7 +42,7 @@ class Feedback extends Component {
           >
             {score}
           </h2>
-          <h2> Your score: </h2>
+          <h2> You hit: </h2>
           <h2
             data-testid="feedback-total-question"
           >
