@@ -47,7 +47,7 @@ class Timer extends Component {
     const { timer } = this.state;
     return (
       <div className="conteinerTimer">
-        <RiTimer2Line className="timer" />
+        <RiTimer2Line className="timer" size={ 35 } />
         <h1>{ timer }</h1>
       </div>
     );

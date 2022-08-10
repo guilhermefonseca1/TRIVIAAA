@@ -13,10 +13,19 @@
 
   .timer {
     animation: timer-spin infinite 1s linear;
+    margin-right: 10px;
   }
 }
 
 .conteinerTimer {
   align-items: center;
+  background-color: #757e88;
+  border-radius: 25px;
+  color: white;
   display: flex;
+  padding: 10px 50px;
+}
+
+.timer {
+  size: 50px;
 }
