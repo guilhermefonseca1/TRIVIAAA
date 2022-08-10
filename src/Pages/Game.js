@@ -16,6 +16,7 @@ class Game extends Component {
       correct: '',
       wrong: '',
       stopTimer: false,
+      showNextBtn: false,
       answersArr: [],
     };
   }
@@ -117,6 +118,7 @@ class Game extends Component {
         <Header />
         <Timer
           stopTimer={ stopTimer }
+          handleNextBtnClick={ this.handleNextBtnClick }
         />
         <h1 data-testid="question-category">{ this.handleQuestions().category }</h1>
         <h2 data-testid="question-text">{ this.handleQuestions().question }</h2>
