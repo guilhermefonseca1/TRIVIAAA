@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import '../Style/Game.css';
-import { getAssertions, getNextBtnClick, getScorePoints } from '../Redux/Action';
+import { getAssertions, getNextBtnClick, getScorePoints,
+  handleDisableBtns } from '../Redux/Action';
 import Timer from '../components/Timer';
 
 class Game extends Component {
@@ -14,8 +15,15 @@ class Game extends Component {
       questionsIndex: 0,
       correct: '',
       wrong: '',
-      // nextBtn: false,
+      stopTimer: false,
+      answersArr: [],
     };
+  }
+
+  componentDidMount() {
+    const { getGameData } = this.props;
+    if (getGameData.length === 0) return getGameData;
+    this.handleMultipleOptions();
   }
 
   handleQuestions = () => {
@@ -26,6 +34,9 @@ class Game extends Component {
   }
 
   handleMultipleOptions = () => {
+    const { questionsIndex } = this.state;
+    const maxQuestions = 5;
+    if (questionsIndex === maxQuestions) return;
     const { correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswers } = this.handleQuestions();
 
@@ -35,7 +46,9 @@ class Game extends Component {
       const random = Math.floor(Math.random() * (i + 1));
       [answersArr[i], answersArr[random]] = [answersArr[random], answersArr[i]];
     }
-    return answersArr;
+    this.setState({
+      answersArr,
+    });
   }
 
   getMultiplier = (difficulty) => {
@@ -56,6 +69,7 @@ class Game extends Component {
       correct: 'correct',
       wrong: 'wrong',
       showNextBtn: true,
+      stopTimer: true,
     });
     if (id === 'correct') {
       const baseScorePoints = 10;
@@ -65,26 +79,33 @@ class Game extends Component {
       dispatch(getAssertions());
       dispatch(getScorePoints(totalScore));
     }
+    dispatch(handleDisableBtns(true));
   }
 
   handleNextBtnClick = () => {
     const { dispatch } = this.props;
+
     this.setState((prevState) => ({
       correct: '',
       wrong: '',
       questionsIndex: prevState.questionsIndex + 1,
       showNextBtn: false,
-    }));
-    dispatch(getNextBtnClick(true));
+      stopTimer: false,
+    }), () => {
+      this.handleMultipleOptions();
+      dispatch(getNextBtnClick(true));
+    });
+    dispatch(handleDisableBtns(false));
   }
 
   render() {
-    const { questionsIndex, wrong, correct, showNextBtn } = this.state;
-    const { getGameData, history, isDisabled } = this.props;
+    const { questionsIndex, wrong, correct, showNextBtn,
+      stopTimer, answersArr } = this.state;
+    const { getGameData, history, isDisabled, timer } = this.props;
 
     if (getGameData.length === 0) {
-      localStorage.removeItem('token');
       history.push('/');
+      localStorage.removeItem('token');
       return <h1>Invalid Token</h1>;
     }
     if (questionsIndex === getGameData.length) {
@@ -94,12 +115,14 @@ class Game extends Component {
     return (
       <div>
         <Header />
-        <Timer />
+        <Timer
+          stopTimer={ stopTimer }
+        />
         <h1 data-testid="question-category">{ this.handleQuestions().category }</h1>
         <h2 data-testid="question-text">{ this.handleQuestions().question }</h2>
         <section data-testid="answer-options">
           {
-            this.handleMultipleOptions().map((el, index) => (
+            answersArr.map((el, index) => (
               <button
                 className={ el === this.handleQuestions().correct_answer
                   ? correct
@@ -120,7 +143,7 @@ class Game extends Component {
             ))
           }
           {
-            showNextBtn
+            (showNextBtn || timer === 0)
             && (
               <button
                 type="button"

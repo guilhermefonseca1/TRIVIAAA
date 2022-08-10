@@ -11,6 +11,7 @@ export const GET_NEXT_BTN_CLICK = 'GET_NEXT_BTN_CLICK';
 export const HANDLE_DISABLE_BTNS = 'HANDLE_DISABLE_BTNS';
 export const GET_TIMER = 'GET_TIMER';
 export const GET_ASSERTIONS = 'GET_ASSERTIONS';
+export const STOP_TIMER = 'STOP_TIMER';
 
 export const requestToken = () => ({ type: REQUEST_TOKEN });
 
@@ -31,6 +32,8 @@ export const handleDisableBtns = (bool) => ({ type: HANDLE_DISABLE_BTNS, bool })
 export const getTimer = (timer) => ({ type: GET_TIMER, timer });
 
 export const getAssertions = () => ({ type: GET_ASSERTIONS });
+
+export const stopTimer = () => ({ type: STOP_TIMER });
 
 export const getToken = () => async (dispatch) => {
   dispatch(requestToken);

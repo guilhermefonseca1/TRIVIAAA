@@ -60,8 +60,8 @@ describe('Testando as configurações do componente Login', () => {
   it('Testando os textos da página de login', () => {
     renderWithRouterAndRedux(<App />);
 
-    const labelEmail = screen.getByLabelText('Email:');
-    const labelName = screen.getByLabelText('Name:');
+    const labelEmail = screen.getByPlaceholderText('Email')
+    const labelName = screen.getByPlaceholderText('Nome do Jogador');
 
     expect(labelEmail).toBeInTheDocument();
     expect(labelName).toBeInTheDocument();
@@ -86,9 +86,7 @@ describe('Testando as configurações do componente Login', () => {
     const email = screen.getByText('email');
 
     expect(getPlayerName && email).toBeInTheDocument();
-
   })
-
 })
 describe('Testa se na página de login há data-test', () => {
   window.fetch = jest.fn(async () => ({

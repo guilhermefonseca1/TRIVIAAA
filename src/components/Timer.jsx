@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getTimer, handleDisableBtns } from '../Redux/Action';
+import { getNextBtnClick, getTimer, handleDisableBtns } from '../Redux/Action';
 
 class Timer extends Component {
   constructor() {
@@ -13,7 +13,7 @@ class Timer extends Component {
   }
 
   componentDidMount() {
-    const { resetTimer, dispatch } = this.props;
+    const { dispatch } = this.props;
     const timerInterval = 1000;
 
     this.timer = setInterval(() => {
@@ -21,15 +21,24 @@ class Timer extends Component {
         timer: prevState.timer - 1,
       }), () => {
         const { timer } = this.state;
+        const { resetTimer } = this.props;
         dispatch(getTimer(timer));
-        console.log(resetTimer);
+
         if (timer === 0) {
           clearInterval(this.timer);
           dispatch(handleDisableBtns(true));
         }
-        if (resetTimer) this.setState({ timer: 30 });
+
+        if (resetTimer) {
+          this.setState({ timer: 30 });
+          dispatch(getNextBtnClick(false));
+        }
       });
     }, timerInterval);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   render() {

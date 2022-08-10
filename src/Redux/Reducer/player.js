@@ -27,10 +27,9 @@ const player = (state = INITIAL_STATE, action) => {
       score: state.score + action.score,
     };
   case GET_NEXT_BTN_CLICK:
-    console.log(state.nextBtnClick);
     return {
       ...state,
-      nextBtnClick: state.bool,
+      nextBtnClick: action.bool,
     };
   case HANDLE_DISABLE_BTNS:
     return {
