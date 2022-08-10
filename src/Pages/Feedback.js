@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { MD5 } from 'crypto-js';
+import { MD5 } from 'crypto-js';
 import Header from '../components/Header';
 // import Ranking from './Ranking';
 
@@ -15,16 +15,23 @@ class Feedback extends Component {
       return 'Well Done!';
     };
 
-    // handleLocalStorageRanking = () => {
-    //   const { name, email, score, history } = this.props;
-    //   const gravatar = MD5(email).toString();
-    //   const ranking = [{ name, score, gravatar }];
-    //   const token = localStorage.getItem('token');
-    //   const obj = { ranking, token };
+    handleLocalStorageRanking = () => {
+      const { name, email, score, history } = this.props;
+      const gravatar = MD5(email).toString();
+      const ranking = { name, score, gravatar };
 
-    //   localStorage.setItem('ranking', JSON.stringify(obj));
-    //   history.push('/ranking');
-    // }
+      const token = localStorage.getItem('token');
+      const playerInfo = { ranking, token };
+
+      if (!localStorage.getItem('players')) {
+        localStorage.setItem('players', '[]');
+      }
+      const loadPlayers = JSON.parse(localStorage.getItem('players'));
+      const saveNewPlayers = [...loadPlayers, playerInfo];
+
+      localStorage.setItem('players', JSON.stringify(saveNewPlayers));
+      history.push('/ranking');
+    }
 
     render() {
       const { count, score, history } = this.props;
@@ -58,7 +65,7 @@ class Feedback extends Component {
           <button
             data-testid="btn-ranking"
             type="button"
-            onClick={ () => history.push('/ranking') }
+            onClick={ this.handleLocalStorageRanking }
           >
             Ranking
           </button>
