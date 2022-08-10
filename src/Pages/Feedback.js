@@ -78,11 +78,8 @@ Feedback.propTypes = {
 const mapStateToProps = (store) => ({
   count: store.player.assertions,
   score: store.player.score,
-<<<<<<< HEAD
-=======
   name: store.player.name,
   email: store.player.gravatarEmail,
->>>>>>> 68cab4a8fab037b19f88a0e2ce384b4ca4376d3d
 });
 
 export default connect(mapStateToProps)(Feedback);
