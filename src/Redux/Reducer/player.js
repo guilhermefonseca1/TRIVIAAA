@@ -42,9 +42,10 @@ const player = (state = INITIAL_STATE, action) => {
       timer: action.timer,
     };
   case GET_ASSERTIONS:
+    console.log(action);
     return {
       ...state,
-      assertions: state.assertions + 1,
+      assertions: state.assertions + action.addPoint,
     };
   default:
     return state;

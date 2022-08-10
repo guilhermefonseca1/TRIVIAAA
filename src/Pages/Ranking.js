@@ -1,17 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getAssertions, getScorePoints } from '../Redux/Action';
 
 class Ranking extends React.Component {
-  constructor() {
-    super();
+  handlePlayAgainBtn = () => {
+    const { history, score, dispatch, count } = this.props;
+    const negative = -1;
+    const resetScore = score * negative;
+    const resetAssertions = count * negative;
 
-    this.state = {
-    };
+    dispatch(getScorePoints(resetScore));
+    dispatch(getAssertions(resetAssertions));
+    history.push('/');
   }
 
   render() {
-    const { history } = this.props;
     const ranking = JSON.parse(localStorage.getItem('players'));
     const array = ranking.map((el) => Object.values(el.ranking))
       .sort((a, b) => b[1] - a[1]);
@@ -24,7 +28,7 @@ class Ranking extends React.Component {
           <ol>
             {
               array && array.map((el, index) => (
-                <li key={ el[0] }>
+                <li key={ index }>
                   <div>
                     <p data-testid={ `player-name-${index}` }>
                       { el[0] }
@@ -45,7 +49,7 @@ class Ranking extends React.Component {
         <button
           data-testid="btn-go-home"
           type="button"
-          onClick={ () => history.push('/') }
+          onClick={ this.handlePlayAgainBtn }
         >
           home
         </button>
@@ -61,6 +65,7 @@ Ranking.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (store) => ({
+  count: store.player.assertions,
   name: store.player.name,
   email: store.player.gravatarEmail,
   score: store.player.score,

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { MD5 } from 'crypto-js';
 import Header from '../components/Header';
+import { getAssertions, getScorePoints } from '../Redux/Action';
 // import Ranking from './Ranking';
 
 class Feedback extends Component {
@@ -33,8 +34,19 @@ class Feedback extends Component {
       history.push('/ranking');
     }
 
+    handlePlayAgainBtn = () => {
+      const { history, score, dispatch, count } = this.props;
+      const negative = -1;
+      const resetScore = score * negative;
+      const resetAssertions = count * negative;
+
+      dispatch(getScorePoints(resetScore));
+      dispatch(getAssertions(resetAssertions));
+      history.push('/');
+    }
+
     render() {
-      const { count, score, history } = this.props;
+      const { count, score } = this.props;
       return (
         <div>
           <Header />
@@ -58,7 +70,7 @@ class Feedback extends Component {
           <button
             data-testid="btn-play-again"
             type="button"
-            onClick={ () => history.push('/') }
+            onClick={ this.handlePlayAgainBtn }
           >
             Play Again
           </button>

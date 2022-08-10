@@ -77,7 +77,7 @@ class Game extends Component {
       const multiplier = this.getMultiplier(difficulty);
       const totalScore = baseScorePoints + (timer * multiplier);
 
-      dispatch(getAssertions());
+      dispatch(getAssertions(1));
       dispatch(getScorePoints(totalScore));
     }
     dispatch(handleDisableBtns(true));
