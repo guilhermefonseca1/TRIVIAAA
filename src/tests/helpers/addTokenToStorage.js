@@ -8,12 +8,14 @@ export function saveTokenToStorage(token) {
   localStorage.setItem('token', token);
 }
 
-// export const addToken  = (token) => {
-//   if (!JSON.parse(localStorage.getItem('token'))) {
-//     localStorage.setItem('token', JSON.stringify([]));
+// export default function addToCart(id) {
+//   // const product = await getDetailProduct(id);
+//   if (!localStorage.getItem('cartArray')) {
+//   localStorage.setItem('cartArray', '[]');
 //   }
-//   if (token) {
-//     // const listedTokens = getToken('token');
-//     saveTokens(token);
-//   }
+//   const cart = JSON.parse(localStorage.getItem('cartArray'));
+//   const newArray = [...cart, id];
+//   return localStorage.setItem('cartArray', JSON.stringify(newArray));
+// }
+
 // };
