@@ -62,7 +62,7 @@ body {
 .inputLogin {
   border-radius: 5px;
   margin-bottom: 10px;
-  padding: 5px;
+  padding: 12px 18px;
 }
 
 .button {
@@ -70,9 +70,9 @@ body {
   border: none;
   border-radius: 5px;
   color: white;
-  font-size: 13px;
+  font-size: large;
   margin-top: 15px;
-  padding: 8px 22px;
+  padding: 16px 30px;
   text-align: center;
   text-decoration: none;
 }
