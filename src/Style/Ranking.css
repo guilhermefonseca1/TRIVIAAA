@@ -1,0 +1,57 @@
+.rankingContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* .rankingContainer {
+  display: flex;
+} */
+
+.rankitem {
+  display: flex;
+  justify-content: center;
+  margin: 24px;
+  padding: 0;
+  text-decoration: none;
+}
+
+.itemConteiner {
+  align-items: center;
+  background-color: #757e88;
+  border-radius: 48px;
+  display: flex;
+  padding: 20px;
+  width: 450px;
+}
+
+.rankScore {
+  background-color: #57a342;
+  border-radius: 50%;
+  color: white;
+  margin-right: 20px;
+  padding: 12% 10%;
+}
+
+.imgRank {
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.playerRank {
+  color: white;
+}
+
+.olRank {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.titleRank {
+  font-size: 50px;
+}
+
