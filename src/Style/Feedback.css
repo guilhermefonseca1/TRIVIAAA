@@ -1,0 +1,43 @@
+.feedbackConteiner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.pointsConteiner {
+  align-items: center;
+  display: flex;
+}
+
+.pointsScore {
+  align-items: center;
+  border: solid 2px #757e88;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  margin: 30px 50px;
+  padding: 15px;
+  width: 150px;
+}
+
+.pointsHit {
+  align-items: center;
+  border: solid 2px #757e88;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  margin: 30px 50px;
+  padding: 15px;
+  width: 150px;
+}
+
+.buttonsFeedback {
+  align-content: center;
+  display: flex;
+  margin-top: 40px;
+}
+
+.buttonsFeed {
+  width: 205px;
+}

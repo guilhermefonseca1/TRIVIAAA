@@ -16,6 +16,7 @@
 
   /* justify-content: space-between; */
   margin: 20px;
+  width: 140px;
 }
 
 .picture {
@@ -57,11 +58,12 @@
   background-color: #57a342;
   border-radius: 10px;
   display: flex;
+  justify-content: center;
   margin: 20px;
   padding: 15px;
+  width: 140px;
 }
 
 .youScore {
   margin-right: 5px;
 }
-
