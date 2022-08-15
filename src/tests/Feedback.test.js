@@ -5,8 +5,6 @@ import Feedback from '../Pages/Feedback';
 import renderWithRouterAndRedux from "./helpers/renderWithRouterAndRedux";
 import App from '../App';
 
-// const FEEDBACK_TEXT_ID = 'feedback-text';
-
 const USUARIO_WELL_DONE = {
     player: {
         name: 'Grupo 35',
@@ -69,7 +67,6 @@ describe('Testando as configurações do componente Feedback', () => {
     it('Testando se a página de Feedback renderiza quando há três ou mais acertos', () => {
         renderWithRouterAndRedux(<App />, USUARIO_WELL_DONE, '/feedback');
         
-        // const feedBackPositive = screen.getByTestId(FEEDBACK_TEXT_ID);
         const feedBackPositive = screen.getByTestId('feedback-text');
         
         expect(feedBackPositive).toHaveTextContent(WELL_DONE);
@@ -77,25 +74,10 @@ describe('Testando as configurações do componente Feedback', () => {
     
     it('Testando se a página de Feedback renderiza quando há menos de três acertos', () => {
         renderWithRouterAndRedux(<App />, USUARIO_COULD_BE_BETTER, '/feedback');
-        
-        // const feedBackPositive = screen.getByTestId(FEEDBACK_TEXT_ID);
+
         const feedBackNegative = screen.getByTestId('feedback-text');
         console.log(feedBackNegative.innerHTML)
        
         expect(feedBackNegative).toHaveTextContent(COULD_BE_BETTER);
     });
-    
-    // it('testa se o assertion for maior que 3 o texto Well Done é renderizado na tela', () => {
-        //     const player = {
-            //         name: '',
-            //         assertions: 4,
-            //         score: 0,
-            //         gravatarEmail: '',
-            //       }
-            
-    //     renderWithRouterAndRedux(<Feedback />,  { player }, '/feedback')
-    //     const textBetter = screen.getByText(/Well Done/i)
-    //     screen.logTestingPlaygroundURL()
-    //     expect(textBetter).toBeDefined()
-    //   })
 }); 

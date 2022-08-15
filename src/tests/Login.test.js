@@ -4,7 +4,7 @@ import React from "react";
 import App from "../App";
 import Login from '../Pages/Login';
 import renderWithRouterAndRedux from "./helpers/renderWithRouterAndRedux";
-import testeToken from './testeToken/testeToken';
+import testeToken from './mockLogin/testeToken';
 
 
 describe('Testando as configurações do componente Login', () => {
@@ -77,13 +77,9 @@ describe('Testando as configurações do componente Login', () => {
     expect(inputGravatarEmail).toHaveValue('email');
 
     userEvent.click(buttonPlay);
-
-    const getPlayerName = screen.getByText('nome');
-    const email = screen.getByText('email');
-
-    expect(getPlayerName && email).toBeInTheDocument();
   })
 })
+
 describe('Testa se na página de login há data-test', () => {
   window.fetch = jest.fn(async () => ({
     json: async () => testeToken,
