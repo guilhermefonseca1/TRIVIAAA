@@ -1,6 +1,6 @@
 .header {
-  background-color: #282c34;
-  box-shadow: 5px 5px 5px 3px rgba(0, 0, 0, 0.2);
+  background-color: #757e88;
+  box-shadow: 5px 5px 5px 3px rgba(84, 84, 84, 0.2);
   color: white;
   display: flex;
   flex-wrap: nowrap;
@@ -10,8 +10,18 @@
 }
 
 .userPicture {
+
+  /* background-color: #57a342; */
   display: flex;
+
+  /* justify-content: space-between; */
   margin: 20px;
+  width: 175px;
+}
+
+.picture {
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 @media ( prefers-reduced-motion : no-preference ) {
@@ -45,8 +55,23 @@
 
 .score {
   align-items: center;
-  background-color: rebeccapurple;
+  background-color: #57a342;
+  border-radius: 10px;
   display: flex;
+  justify-content: center;
   margin: 20px;
-  padding: 5px;
+  padding: 15px 0 15px 15px;
+  width: 175px;
+}
+
+.youScore {
+  margin-right: 5px;
+  padding: 5px 10px;
+}
+
+.scoreNumber {
+  background-color: white;
+  border-radius: 0 10px 10px 0;
+  color: #57a342;
+  padding: 18px;
 }

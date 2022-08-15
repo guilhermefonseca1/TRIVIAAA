@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAssertions, getScorePoints } from '../Redux/Action';
+import '../Style/Ranking.css';
 
 class Ranking extends React.Component {
   handlePlayAgainBtn = () => {
@@ -22,26 +23,41 @@ class Ranking extends React.Component {
     console.log(array);
 
     return (
-      <div>
+      <div className="rankingContainer">
         <section>
-          <h1 data-testid="ranking-title">TITLE</h1>
-          <ol>
+          <h1
+            className="titleRank"
+            data-testid="ranking-title"
+          >
+            Ranking
+          </h1>
+          <ol className="olRank">
             {
               array && array.map((el, index) => (
-                <li key={ index }>
-                  <div>
-                    <p data-testid={ `player-name-${index}` }>
-                      { el[0] }
-                    </p>
-                    <p data-testid={ `player-score-${index}` }>
+                <ul
+                  key={ index }
+                  className="rankitem"
+                >
+                  <div className="itemConteiner">
+                    <h1
+                      data-testid={ `player-score-${index}` }
+                      className="rankScore"
+                    >
                       { el[1] }
-                    </p>
+                    </h1>
                     <img
                       src={ `https://www.gravatar.com/avatar/${el[2]}` }
                       alt="ranking"
+                      className="imgRank"
                     />
+                    <h1
+                      data-testid={ `player-name-${index}` }
+                      className="playerRank"
+                    >
+                      { el[0] }
+                    </h1>
                   </div>
-                </li>
+                </ul>
               ))
             }
           </ol>

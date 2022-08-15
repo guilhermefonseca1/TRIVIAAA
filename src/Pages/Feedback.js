@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { MD5 } from 'crypto-js';
 import Header from '../components/Header';
 import { getAssertions, getScorePoints } from '../Redux/Action';
-// import Ranking from './Ranking';
+import '../Style/Feedback.css';
 
 class Feedback extends Component {
     countAsserts = () => {
@@ -50,37 +50,49 @@ class Feedback extends Component {
       return (
         <div>
           <Header />
-          <h1
-            data-testid="feedback-text"
-          >
-            { this.countAsserts() }
-          </h1>
-          <h2> Your score: </h2>
-          <h2
-            data-testid="feedback-total-score"
-          >
-            {score}
-          </h2>
-          <h2> You hit: </h2>
-          <h2
-            data-testid="feedback-total-question"
-          >
-            {count}
-          </h2>
-          <button
-            data-testid="btn-play-again"
-            type="button"
-            onClick={ this.handlePlayAgainBtn }
-          >
-            Play Again
-          </button>
-          <button
-            data-testid="btn-ranking"
-            type="button"
-            onClick={ this.handleLocalStorageRanking }
-          >
-            Ranking
-          </button>
+          <div className="feedbackConteiner">
+            <h1
+              data-testid="feedback-text"
+            >
+              { this.countAsserts() }
+            </h1>
+            <div className="pointsConteiner">
+              <div className="pointsScore">
+                <h2> Your score: </h2>
+                <h1
+                  data-testid="feedback-total-score"
+                >
+                  {score}
+                </h1>
+              </div>
+              <div className="pointsHit">
+                <h2> You hit: </h2>
+                <h1
+                  data-testid="feedback-total-question"
+                >
+                  {count}
+                </h1>
+              </div>
+            </div>
+            <div className="buttonsFeedback">
+              <button
+                className="buttonsFeed"
+                data-testid="btn-play-again"
+                type="button"
+                onClick={ this.handlePlayAgainBtn }
+              >
+                Play Again
+              </button>
+              <button
+                className="buttonsFeed"
+                data-testid="btn-ranking"
+                type="button"
+                onClick={ this.handleLocalStorageRanking }
+              >
+                Ranking
+              </button>
+            </div>
+          </div>
         </div>
       );
     }

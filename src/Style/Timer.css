@@ -1,0 +1,31 @@
+@keyframes timer-spin {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media ( prefers-reduced-motion : no-preference ) {
+
+  .timer {
+    animation: timer-spin infinite 1s linear;
+    margin-right: 10px;
+  }
+}
+
+.conteinerTimer {
+  align-items: center;
+  background-color: #757e88;
+  border-radius: 25px;
+  color: white;
+  display: flex;
+  padding: 10px 50px;
+}
+
+.timer {
+  size: 50px;
+}

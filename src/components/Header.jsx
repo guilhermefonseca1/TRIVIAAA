@@ -14,11 +14,13 @@ class Header extends Component {
       <div className="header">
         <div className="userPicture">
           <img
+            className="picture"
             src={ `https://www.gravatar.com/avatar/${gravatar}` }
             alt=""
             data-testid="header-profile-picture"
           />
-          <p data-testid="header-player-name">{name}</p>
+          {/* <h2> Olá, </h2> */}
+          <h2 data-testid="header-player-name">{name}</h2>
         </div>
         <div>
           <div className="App-header">
@@ -26,10 +28,10 @@ class Header extends Component {
           </div>
         </div>
         <div className="score">
-          <p>
+          <h3 className="youScore">
             Your Score is:
-          </p>
-          <p data-testid="header-score">{ score }</p>
+          </h3>
+          <h3 data-testid="header-score" className="scoreNumber">{ score }</h3>
         </div>
       </div>
     );

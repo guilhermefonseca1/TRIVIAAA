@@ -116,47 +116,51 @@ class Game extends Component {
     return (
       <div>
         <Header />
-        <Timer
-          stopTimer={ stopTimer }
-          handleNextBtnClick={ this.handleNextBtnClick }
-        />
-        <h1 data-testid="question-category">{ this.handleQuestions().category }</h1>
-        <h2 data-testid="question-text">{ this.handleQuestions().question }</h2>
-        <section data-testid="answer-options">
-          {
-            answersArr.map((el, index) => (
-              <button
-                className={ el === this.handleQuestions().correct_answer
-                  ? correct
-                  : wrong }
-                key={ el }
-                type="button"
-                data-testid={ el === this.handleQuestions().correct_answer
-                  ? 'correct-answer'
-                  : `wrong-answer-${index}` }
-                id={ el === this.handleQuestions().correct_answer
-                  ? 'correct'
-                  : 'wrong' }
-                onClick={ this.handleAnswersClick }
-                disabled={ isDisabled }
-              >
-                { el }
-              </button>
-            ))
-          }
+        <div className="gamePage">
+          <Timer
+            className="cont"
+            stopTimer={ stopTimer }
+            handleNextBtnClick={ this.handleNextBtnClick }
+          />
+          <h1 data-testid="question-category">{ this.handleQuestions().category }</h1>
+          <h2 data-testid="question-text">{ this.handleQuestions().question }</h2>
+          <section data-testid="answer-options">
+            {
+              answersArr.map((el, index) => (
+                <button
+                  className={ el === this.handleQuestions().correct_answer
+                    ? correct
+                    : wrong }
+                  key={ el }
+                  type="button"
+                  data-testid={ el === this.handleQuestions().correct_answer
+                    ? 'correct-answer'
+                    : `wrong-answer-${index}` }
+                  id={ el === this.handleQuestions().correct_answer
+                    ? 'correct'
+                    : 'wrong' }
+                  onClick={ this.handleAnswersClick }
+                  disabled={ isDisabled }
+                >
+                  { el }
+                </button>
+              ))
+            }
+          </section>
           {
             (showNextBtn || timer === 0)
             && (
               <button
                 type="button"
                 data-testid="btn-next"
+                className="buttonAsk"
                 onClick={ this.handleNextBtnClick }
               >
                 Next
               </button>
             )
           }
-        </section>
+        </div>
       </div>
     );
   }
