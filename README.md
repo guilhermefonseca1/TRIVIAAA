@@ -33,7 +33,8 @@ Nessa aplicação, a pessoa usuária poderá:
 * Configurar algumas opções para o jogo em uma tela de configuração acessível a partir do cabeçalho do app.
 
 
-Esse projeto foi submetido a testes de 25 requisitos.
+Esse projeto foi submetido a testes de 25 requisitos, sendo eles:
+
 Tela de início/login
 
 1. Crie a tela de login, onde a pessoa que joga deve preencher as informações para iniciar um jogo
