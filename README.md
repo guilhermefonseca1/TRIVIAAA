@@ -1,7 +1,7 @@
 Equipe:
-<a href="https://github.com/guilhermefonseca1" target="_blank">Guilherme Soares Lima</a> / <a href="https://github.com/renanbigm" target="_blank">renan fagundes</a> / <a href="https://github.com/Hugodesousa" target="_blank">Hugo de Sousa Silva</a> / <a href="https://github.com/VictorZanoto" target="_blank">Victor Zanoto</a> / <a href="https://github.com/RafaAssis06" target="_blank">Rafael Assis</a>
+<a href="https://github.com/guilhermefonseca1" target="blank">Guilherme Soares Lima</a> / <a href="https://github.com/renanbigm" target="blank">renan fagundes</a> / <a href="https://github.com/Hugodesousa" target="blank">Hugo de Sousa Silva</a> / <a href="https://github.com/VictorZanoto" target="blank">Victor Zanoto</a> / <a href="https://github.com/RafaAssis06" target="blank">Rafael Assis</a>
 
-LINK DO PROJETO: <a href="https://triviaa.surge.sh/" target="_blank">Aqui</a> 
+LINK DO PROJETO: <a href="https://triviaa.surge.sh/" target="blank">Aqui</a> 
 
 Habilidades desenvolvidas:
 
