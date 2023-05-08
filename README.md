@@ -3,6 +3,10 @@ Equipe:
 
 
 
+https://user-images.githubusercontent.com/98996583/236829294-ce84b81c-ecde-4ccb-9e8b-7735b6654e94.mp4
+
+
+
 ## LINK DO PROJETO RODANDO: <a href="https://triviaa.surge.sh/" target="blank">Clique Aqui</a> 
 
 
